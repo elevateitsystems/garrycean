@@ -11,7 +11,7 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="w-full max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
+      <div className="w-full container mx-auto flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
         {/* Left Side - Login Form */}
         <div className="w-full lg:w-1/2 flex items-center justify-center">
           <div className="w-full max-w-md space-y-8">

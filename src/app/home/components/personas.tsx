@@ -30,7 +30,7 @@ export default function Personas() {
 
   return (
     <section className="bg-slate-50 pt-12 pb-24 sm:pb-32 sm:pt-16">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="mx-auto container px-6 lg:px-8">
         
         {/* Header */}
         <motion.div 

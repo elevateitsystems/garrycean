@@ -38,7 +38,7 @@ export default function ContactPage() {
 </div>
 
       {/* Main Content */}
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 pt-12">
+      <div className="mx-auto container px-6 lg:px-8 pt-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
           {/* Contact Information */}

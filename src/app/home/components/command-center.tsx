@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 export default function CommandCenter() {
   return (
     <section className="bg-slate-50 pt-24 pb-12 sm:pt-32 sm:pb-32 border-t border-slate-200 overflow-hidden">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="mx-auto container px-6 lg:px-8">
         
         {/* Title Content Block */}
         <motion.div 

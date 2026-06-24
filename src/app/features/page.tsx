@@ -44,7 +44,7 @@ export default function FeaturesPage() {
 
   return (
     <div className="bg-slate-50 py-16 sm:py-24">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="mx-auto container px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-20">
           <h1 className="text-4xl font-extrabold tracking-tight text-brand-dark sm:text-5xl">
             Everything you need. <br />

@@ -42,7 +42,7 @@ export default function TrialPage() {
 
   return (
     <div className="bg-slate-50 min-h-screen py-16 sm:py-24">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="mx-auto container px-6 lg:px-8">
         
         {/* Header section matching onboarding */}
         <div className="max-w-3xl mx-auto text-center mb-16 space-y-4">

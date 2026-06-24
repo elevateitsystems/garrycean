@@ -11,7 +11,7 @@ import {
 export default function Footer() {
   return (
     <footer className="bg-gradient-to-b from-brand-dark to-black text-white/90 border-t border-white/10">
-      <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+      <div className="mx-auto container px-6 py-16 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* Brand Section */}
           <div className="lg:col-span-5 space-y-6">
