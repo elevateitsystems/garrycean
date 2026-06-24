@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Check, ShieldCheck, Zap, Database } from "lucide-react";
 
 export const metadata = {
@@ -13,19 +14,25 @@ export default function SolutionsPage() {
       title: "Consolidated Billing",
       desc: "Remove manual calculations from client invoicing. Our PSA solution directly connects device tracking logs to your billing engine, matching tier contracts.",
       icon: Zap,
-      benefits: ["Automated billing profiles", "Prorated adjustments", "Direct QuickBooks & Xero Sync"]
+      benefits: ["Automated billing profiles", "Prorated adjustments", "Direct QuickBooks & Xero Sync"],
+      image: "/dashboard-Customer-Lifecycle.png",
+      imageAlt: "Consolidated Billing workspace preview"
     },
     {
       title: "Unified RMM Monitoring",
       desc: "Get immediate endpoint alerts without keeping tabs open across three browser screens. Alerts are automatically logged directly into the CRM database as trackable status tickets.",
       icon: ShieldCheck,
-      benefits: ["Instant alerts feed", "Custom automation actions", "Continuous state monitoring"]
+      benefits: ["Instant alerts feed", "Custom automation actions", "Continuous state monitoring"],
+      image: "/all-Customer.png",
+      imageAlt: "Unified RMM Monitoring workspace preview"
     },
     {
       title: "Integrated CRM Pipelines",
       desc: "Ensure seamless handoffs between sales leads and service provisioning. Unified workspaces sync client status profiles across every module instantly.",
       icon: Database,
-      benefits: ["Smooth lead onboarding", "Shared client profile timeline", "Comprehensive activity logs"]
+      benefits: ["Smooth lead onboarding", "Shared client profile timeline", "Comprehensive activity logs"],
+      image: "/Employees.png",
+      imageAlt: "Integrated CRM Pipelines workspace preview"
     }
   ];
 
@@ -67,12 +74,20 @@ export default function SolutionsPage() {
                     ))}
                   </ul>
                 </div>
-                <div className="flex-1 w-full max-w-lg bg-white p-8 rounded-3xl border border-slate-200 shadow-xl flex items-center justify-center min-h-[300px]">
-                  <div className="text-center space-y-4">
-                    <div className="text-6xl font-extrabold text-slate-100 uppercase tracking-wider select-none">
-                      {sol.title.split(" ")[0]}
-                    </div>
-                    <p className="text-xs text-slate-400 font-mono">Workspace module visualize preview</p>
+                <div className="flex-1 w-full max-w-lg bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden">
+                  <div className="relative w-full h-[300px]">
+                    <Image
+                      src={sol.image}
+                      alt={sol.imageAlt}
+                      fill
+                      className="object-cover"
+                    />
+                    {/* Overlay with label */}
+                    {/* <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+                      <p className="text-white/90 text-xs font-mono tracking-wider">
+                        {sol.title.split(" ")[0]} · Workspace module visualize preview
+                      </p>
+                    </div> */}
                   </div>
                 </div>
               </div>
