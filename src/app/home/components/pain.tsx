@@ -1,5 +1,8 @@
+"use client";
+
 import React from "react";
 import { FileSpreadsheet, Hourglass, EyeOff, Smile } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function Pain() {
   const painPoints = [
@@ -32,7 +35,15 @@ export default function Pain() {
   return (
     <section className="bg-slate-50 py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="max-w-5xl text-center mx-auto mb-20">
+        
+        {/* Header */}
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="max-w-5xl text-center mx-auto mb-20"
+        >
           <h2 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight">
             Managing your Clients Shouldn't Feel Like <br />{" "}
             <span className="text-brand-blue">Juggling Chaos</span>
@@ -40,14 +51,39 @@ export default function Pain() {
           <p className="mt-2 text-base sm:text-lg text-slate-500 max-w-xl mx-auto leading-relaxed">
             Are you tired of switching between multiple tools just to get work done?
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+        {/* Pain Points Grid */}
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.12,
+                delayChildren: 0.2,
+              },
+            },
+          }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12"
+        >
           {painPoints.map((point, index) => {
             const Icon = point.icon;
             return (
-              <div
+              <motion.div
                 key={index}
+                variants={{
+                  hidden: { opacity: 0, y: 60 },
+                  visible: { 
+                    opacity: 1, 
+                    y: 0,
+                    transition: { duration: 0.5, ease: "easeOut" }
+                  },
+                }}
+                whileHover={{ y: -4 }}
                 className="flex gap-6 p-8 bg-white rounded-[6px] border border-slate-200/80 hover:border-brand-blue/35 transition-all duration-300 shadow-sm"
               >
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[6px] bg-blue-50 text-red-500">
@@ -61,10 +97,10 @@ export default function Pain() {
                     {point.description}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

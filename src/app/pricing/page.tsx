@@ -59,7 +59,7 @@ export default function PricingPage() {
   return (
     <div className="bg-slate-50 py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-20">
+        <div className="text-center max-w-3xl mx-auto mb-20 m-10">
           <h1 className="text-4xl font-extrabold tracking-tight text-brand-dark sm:text-5xl">
             Simple, Transparent <span className="text-brand-blue">Plans</span>
           </h1>

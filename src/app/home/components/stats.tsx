@@ -1,5 +1,8 @@
+"use client";
+
 import React from "react";
 import { Clock, TrendingUp, CheckSquare, Layers } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function Stats() {
   const impacts = [
@@ -28,7 +31,15 @@ export default function Stats() {
   return (
     <section className="bg-white py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="max-w-3xl mx-auto text-center mb-16 space-y-4">
+        
+        {/* Header */}
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="max-w-3xl mx-auto text-center mb-16 space-y-4"
+        >
           <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 leading-tight">
             The Measurable Impact on{" "}
             <span className="text-brand-blue"> Your MSP </span>
@@ -37,14 +48,39 @@ export default function Stats() {
             Transform your operations with powerful automation and streamlined
             workflows.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+        {/* Stats Grid */}
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.1,
+                delayChildren: 0.2,
+              },
+            },
+          }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12"
+        >
           {impacts.map((imp, index) => {
             const Icon = imp.icon;
             return (
-              <div
+              <motion.div
                 key={index}
+                variants={{
+                  hidden: { opacity: 0, y: 60 },
+                  visible: { 
+                    opacity: 1, 
+                    y: 0,
+                    transition: { duration: 0.5, ease: "easeOut" }
+                  },
+                }}
+                whileHover={{ y: -4 }}
                 className="flex gap-6 items-start p-6 bg-slate-50 rounded-[6px] border border-slate-100 hover:border-brand-blue/20 transition-all duration-300"
               >
                 <div className="h-12 w-12 flex items-center justify-center rounded-[6px] bg-blue-50 text-brand-blue shrink-0">
@@ -58,10 +94,10 @@ export default function Stats() {
                     {imp.desc}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

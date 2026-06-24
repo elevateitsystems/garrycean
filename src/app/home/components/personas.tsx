@@ -1,5 +1,8 @@
+"use client";
+
 import React from "react";
 import { Server, Compass, HelpCircle, Code2 } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function Personas() {
   const options = [
@@ -28,7 +31,15 @@ export default function Personas() {
   return (
     <section className="bg-slate-50 pt-12 pb-24 sm:pb-32 sm:pt-16">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="max-w-3xl mx-auto text-center mb-16 space-y-4">
+        
+        {/* Header */}
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="max-w-3xl mx-auto text-center mb-16 space-y-4"
+        >
           <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 leading-tight">
             Built for{" "}
             <span className="text-brand-blue"> Service Providers Like You</span>
@@ -37,14 +48,39 @@ export default function Personas() {
             Whether you're a solo consultant or managing a team of 50+, StackMSP
             scales with your business.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* Cards Grid with Stagger Animation */}
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.1,
+                delayChildren: 0.2,
+              },
+            },
+          }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+        >
           {options.map((opt, index) => {
             const Icon = opt.icon;
             return (
-              <div
+              <motion.div
                 key={index}
+                variants={{
+                  hidden: { opacity: 0, y: 60 },
+                  visible: { 
+                    opacity: 1, 
+                    y: 0,
+                    transition: { duration: 0.5, ease: "easeOut" }
+                  },
+                }}
+                whileHover={{ y: -4 }}
                 className="bg-white border border-slate-200 p-8 rounded-[6px] hover:border-brand-blue/35 transition-all duration-300 shadow-sm"
               >
                 <div className="h-12 w-12 flex items-center justify-center rounded-[6px] bg-blue-50 text-brand-blue mb-6">
@@ -56,10 +92,10 @@ export default function Personas() {
                 <p className="text-sm text-slate-600 leading-relaxed">
                   {opt.desc}
                 </p>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

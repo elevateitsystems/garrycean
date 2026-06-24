@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import {
   Users,
@@ -9,6 +11,7 @@ import {
   ShieldAlert,
   BookOpen,
 } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function Modules() {
   const capabilities = [
@@ -57,7 +60,15 @@ export default function Modules() {
   return (
     <section className="bg-white py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="max-w-5xl text-center mx-auto mb-20">
+        
+        {/* Header */}
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="max-w-5xl text-center mx-auto mb-20"
+        >
           <h2 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight">
             Everything Your MSP Needs, <br />{" "}
             <span className="text-brand-blue">All in One Place</span>
@@ -66,14 +77,39 @@ export default function Modules() {
             From client onboarding to final invoice, StackMSP handles it all
             with powerful features designed for modern service providers.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* Features Grid with Stagger Animation */}
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.1,
+                delayChildren: 0.2,
+              },
+            },
+          }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+        >
           {capabilities.map((cap, index) => {
             const Icon = cap.icon;
             return (
-              <div
+              <motion.div
                 key={index}
+                variants={{
+                  hidden: { opacity: 0, y: 60 },
+                  visible: { 
+                    opacity: 1, 
+                    y: 0,
+                    transition: { duration: 0.5, ease: "easeOut" }
+                  },
+                }}
+                whileHover={{ y: -4 }}
                 className="flex flex-col justify-between p-6 bg-slate-50 rounded-[6px] border border-slate-200/60 hover:border-brand-blue/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
               >
                 <div>
@@ -87,10 +123,10 @@ export default function Modules() {
                     {cap.desc}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
