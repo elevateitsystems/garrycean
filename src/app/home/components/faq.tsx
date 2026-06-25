@@ -1,198 +1,136 @@
 "use client";
+
 import React, { useState } from "react";
-import { ChevronDown, ChevronUp, HelpCircle, Plus, Minus } from "lucide-react";
+import { ChevronDown, HelpCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function FAQ() {
   const faqs = [
     { 
-      q: "Do you have pricing plan?", 
-      a: "Yes, we offer flexible subscription tiers starting at $149/month designed to scale alongside your client workspace volume and device limitations." 
+      q: "Do you have pricing plans?", 
+      a: "Yes, we offer flexible subscription tiers starting at $149/month designed to scale alongside your client workspace volume and device limitations.",
+      tag: "WORKSPACE_BILLING"
     },
     { 
       q: "What is your refund policy?", 
-      a: "All subscriptions come with a 30-day money-back guarantee, allowing your team to test features risk-free. No hard contracts required." 
+      a: "All subscriptions come with a 30-day money-back guarantee, allowing your team to test features risk-free. No hard contracts required.",
+      tag: "GUARANTEE_TERMS" 
     },
     { 
-      q: "How standard is security?", 
-      a: "StackMSP enforces strict enterprise-level encryption, multi-factor authentication requirements, and role-based access control policies across all modules." 
+      q: "How secure is the data layer?", 
+      a: "StackMSP enforces strict enterprise-level encryption, multi-factor authentication requirements, and role-based access control policies across all modules.",
+      tag: "COMPLIANCE_SECURITY"
     },
     { 
       q: "Is customer support 24/7?", 
-      a: "Yes. Our priority escalation teams handle platform issues 24/7, keeping your core business operations up and running smoothly around the clock." 
+      a: "Yes. Our priority escalation teams handle platform issues 24/7, keeping your core business operations up and running smoothly around the clock.",
+      tag: "TECHNICAL_SLA"
     },
     { 
       q: "Can we build custom features?", 
-      a: "Absolutely. StackMSP features open REST API access points and secure webhook endpoints, allowing internal developers to build custom workflow widgets." 
+      a: "Absolutely. StackMSP features open REST API access points and secure webhook endpoints, allowing internal developers to build custom workflow widgets.",
+      tag: "DEVELOPER_APIS"
     },
   ];
 
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  const fadeInUp = {
-    initial: { opacity: 0, y: 40 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.5, ease: "easeOut" }
-  };
-
-  const staggerContainer = {
-    animate: {
-      transition: { staggerChildren: 0.08, delayChildren: 0.2 }
-    }
-  };
-
   return (
-    <section className="relative bg-gradient-to-b from-white to-slate-50/80 py-24 sm:py-32 overflow-hidden">
-      {/* Background Decorative Elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute -top-24 -right-24 w-96 h-96 bg-brand-blue/5 rounded-full blur-3xl" />
-        <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl" />
-      </div>
+    <section className="bg-white py-24 sm:py-32 relative overflow-hidden">
+      {/* Structural Top/Bottom Boundary Line */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-slate-200/60" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-slate-200/60" />
 
-      <div className="relative mx-auto max-w-4xl px-6 lg:px-8">
+      <div className="mx-auto max-w-4xl px-6 lg:px-8">
         
-        {/* Header */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="max-w-3xl mx-auto text-center mb-16 space-y-6"
-        >
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-blue/10 border border-brand-blue/20"
-          >
-            <HelpCircle className="h-4 w-4 text-brand-blue" />
-            <span className="text-xs font-semibold text-brand-blue uppercase tracking-wider">Support Center</span>
-          </motion.div>
-
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 leading-[1.1]">
-            Frequently Asked{" "}
-            <span className="bg-gradient-to-r from-brand-blue to-blue-600 bg-clip-text text-transparent">
+        {/* Centered Header Block */}
+        <div className="text-center max-w-2xl mx-auto mb-24">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-slate-50 px-3 py-1 text-[11px] font-bold uppercase tracking-widest text-slate-500 border border-slate-200/80 mb-5">
+            <HelpCircle className="h-3 w-3 text-slate-400" /> Support Desk
+          </span>
+          <h2 className="text-4xl sm:text-5xl font-black tracking-tight text-slate-900 leading-[1.1]">
+            Frequently Asked <br />
+            <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
               Questions
             </span>
           </h2>
+          <p className="mt-5 text-base text-slate-500 leading-relaxed">
+            Got questions about onboarding, feature migrations, or security configurations? Find instant clear telemetry below.
+          </p>
+        </div>
 
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-base sm:text-lg text-slate-500 max-w-xl mx-auto leading-relaxed"
-          >
-            Got questions about onboarding, feature migrations, or security standards? We have answers.
-          </motion.p>
-        </motion.div>
-
-        {/* FAQ Items with Stagger Animation */}
-        <motion.div 
-          variants={staggerContainer}
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true }}
-          className="space-y-3"
-        >
+        {/* Minimal Stacked Accordion Layout */}
+        <div className="space-y-4">
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
             return (
-              <motion.div 
+              <div 
                 key={index}
-                variants={fadeInUp}
-                className={`group relative bg-white rounded-xl border transition-all duration-300 ${
+                className={`group rounded-xl border transition-all duration-300 overflow-hidden relative ${
                   isOpen 
-                    ? "border-brand-blue/30 shadow-lg shadow-brand-blue/5 scale-[1.01]" 
-                    : "border-slate-200/80 hover:border-slate-300/80 hover:shadow-md"
+                    ? "bg-slate-50/50 border-slate-300/80 shadow-sm" 
+                    : "bg-white border-slate-200/60 hover:border-slate-300"
                 }`}
               >
-                {/* Glow effect */}
-                {isOpen && (
-                  <div className="absolute -inset-px bg-gradient-to-r from-brand-blue/20 via-blue-400/20 to-brand-blue/20 rounded-xl blur-sm -z-10" />
-                )}
+                {/* Left Active Accent Track */}
+                <div className={`absolute left-0 top-0 bottom-0 w-[3px] bg-blue-600 transition-transform duration-300 ${
+                  isOpen ? "scale-y-100" : "scale-y-0"
+                }`} />
 
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : index)}
-                  className="flex w-full items-center justify-between p-6 text-left transition-all duration-200"
+                  className="flex w-full items-center justify-between p-6 text-left transition-colors duration-200"
                 >
-                  <span className="flex items-start gap-4 pr-4">
-                    <span className={`mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full transition-all duration-300 ${
-                      isOpen 
-                        ? "bg-brand-blue text-white shadow-md shadow-brand-blue/30" 
-                        : "bg-slate-100 text-slate-400 group-hover:bg-slate-200"
-                    }`}>
-                      {isOpen ? (
-                        <Minus className="h-4 w-4" />
-                      ) : (
-                        <Plus className="h-4 w-4 group-hover:rotate-90 transition-transform" />
-                      )}
+                  <div className="flex flex-col gap-1.5 pr-6">
+                    <span className="text-[9px] font-mono font-bold text-slate-400 tracking-widest uppercase">
+                      // {faq.tag}
                     </span>
-                    <span className={`text-base font-semibold transition-colors duration-200 ${
-                      isOpen ? "text-brand-blue" : "text-slate-800 group-hover:text-slate-900"
+                    <span className={`text-base font-bold tracking-tight transition-colors ${
+                      isOpen ? "text-slate-900" : "text-slate-700 group-hover:text-slate-900"
                     }`}>
                       {faq.q}
                     </span>
-                  </span>
-                  <span className={`shrink-0 transition-all duration-300 ${isOpen ? "text-brand-blue" : "text-slate-400"}`}>
-                    {isOpen ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
-                  </span>
+                  </div>
+                  
+                  <div className={`h-8 w-8 rounded-lg bg-slate-50 border border-slate-200/60 flex items-center justify-center text-slate-400 group-hover:text-slate-600 shrink-0 transition-transform duration-300 ${
+                    isOpen ? "rotate-180 bg-white border-slate-300 text-slate-900" : ""
+                  }`}>
+                    <ChevronDown className="h-4 w-4" />
+                  </div>
                 </button>
 
-                {/* Animated Answer */}
+                {/* Animated Inner Container */}
                 <AnimatePresence initial={false}>
                   {isOpen && (
                     <motion.div
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.4, ease: "easeInOut" }}
-                      className="overflow-hidden"
+                      transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
                     >
-                      <div className="px-6 pb-6 pt-1 text-slate-600 text-sm leading-relaxed border-t border-slate-100/80">
-                        <div className="flex gap-4">
-                          <div className="w-7 shrink-0" />
-                          <div className="flex-1">
-                            {faq.a}
-                            <div className="mt-3 flex items-center gap-2 text-xs text-brand-blue/70">
-                              <span className="inline-block h-1 w-1 rounded-full bg-brand-blue/50" />
-                              <span>Still have questions? <button className="font-semibold hover:text-brand-blue transition-colors">Contact support →</button></span>
-                            </div>
-                          </div>
-                        </div>
+                      <div className="px-6 pb-6 text-slate-600 text-sm leading-relaxed font-medium">
+                        <p className="max-w-3xl text-slate-500">
+                          {faq.a}
+                        </p>
                       </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </motion.div>
+              </div>
             );
           })}
-        </motion.div>
+        </div>
 
-        {/* Bottom CTA */}
-        <motion.div 
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-          className="mt-16 text-center"
-        >
-          <div className="inline-flex items-center gap-6 px-8 py-4 bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition-all">
-            <div className="flex -space-x-2">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="h-8 w-8 rounded-full bg-gradient-to-br from-brand-blue/20 to-blue-400/20 border-2 border-white flex items-center justify-center text-xs font-bold text-brand-blue">
-                  {String.fromCharCode(64 + i)}
-                </div>
-              ))}
-            </div>
-            <div className="text-left">
-              <p className="text-sm font-semibold text-slate-800">Still have questions?</p>
-              <p className="text-xs text-slate-500">Our team is here to help 24/7</p>
-            </div>
-            <button className="rounded-lg bg-brand-blue px-5 py-2 text-sm font-semibold text-white shadow-md shadow-brand-blue/25 hover:bg-brand-blue/95 transition-all hover:shadow-lg hover:-translate-y-0.5">
-              Contact Support
+        {/* Clean, Premium Footnote CTA */}
+        <div className="mt-16 text-center pt-8 border-t border-slate-100">
+          <p className="text-sm font-medium text-slate-600">
+            Can&apos;t find the exact technical specifications you need?{" "}
+            <button className="text-blue-600 font-bold hover:text-blue-700 underline underline-offset-4 decoration-2 transition-colors">
+              Speak with an infrastructure engineer →
             </button>
-          </div>
-        </motion.div>
+          </p>
+        </div>
+
       </div>
     </section>
   );
