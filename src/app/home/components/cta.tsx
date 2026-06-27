@@ -45,7 +45,7 @@ export default function CTA() {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="text-xl text-slate-300 max-w-xl mx-auto leading-relaxed"
           >
-            Join hundreds of MSPs who've ditched the chaos for clarity. Start your free 14-day trial—no credit card required.
+            Join hundreds of MSPs who've ditched the chaos for clarity. Start your free 30-day trial—no credit card required.
           </motion.p>
 
           {/* Buttons */}
@@ -94,7 +94,7 @@ export default function CTA() {
             <div className="flex items-center gap-2">
               <div className="h-px w-6 bg-white/30" /> No credit card required
             </div>
-            <div>14 days free</div>
+            <div>30 days free</div>
             <div>Cancel anytime</div>
           </motion.div>
         </motion.div>

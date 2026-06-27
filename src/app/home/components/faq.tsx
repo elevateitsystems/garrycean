@@ -1,35 +1,31 @@
 "use client";
 
 import React, { useState } from "react";
-import { ChevronDown, HelpCircle } from "lucide-react";
+import { ChevronDown, HelpCircle, Shield, CreditCard, Calendar, Users, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 
 export default function FAQ() {
   const faqs = [
     { 
-      q: "Do you have pricing plans?", 
-      a: "Yes, we offer flexible subscription tiers starting at $149/month designed to scale alongside your client workspace volume and device limitations.",
-      tag: "WORKSPACE_BILLING"
+      q: "How does the 30-day trial work?", 
+      a: "You get one seat of each role for 30 days. No credit card required.",
+      tag: "TRIAL_INFO"
     },
     { 
-      q: "What is your refund policy?", 
-      a: "All subscriptions come with a 30-day money-back guarantee, allowing your team to test features risk-free. No hard contracts required.",
-      tag: "GUARANTEE_TERMS" 
+      q: "Can I add seats anytime?", 
+      a: "Yes. Additional seats are prorated for the remainder of your annual term.",
+      tag: "SEATS_BILLING" 
     },
     { 
-      q: "How secure is the data layer?", 
-      a: "StackMSP enforces strict enterprise-level encryption, multi-factor authentication requirements, and role-based access control policies across all modules.",
-      tag: "COMPLIANCE_SECURITY"
+      q: "Is there a monthly billing option?", 
+      a: "Only the base Pro plan can be paid monthly. All additional seats are annual.",
+      tag: "BILLING_OPTIONS"
     },
     { 
-      q: "Is customer support 24/7?", 
-      a: "Yes. Our priority escalation teams handle platform issues 24/7, keeping your core business operations up and running smoothly around the clock.",
-      tag: "TECHNICAL_SLA"
-    },
-    { 
-      q: "Can we build custom features?", 
-      a: "Absolutely. StackMSP features open REST API access points and secure webhook endpoints, allowing internal developers to build custom workflow widgets.",
-      tag: "DEVELOPER_APIS"
+      q: "What is a Super Admin?", 
+      a: "The highest permission level — can manage all settings, users, and billing.",
+      tag: "ROLE_PERMISSIONS"
     },
   ];
 
@@ -46,7 +42,7 @@ export default function FAQ() {
         {/* Centered Header Block */}
         <div className="text-center max-w-2xl mx-auto mb-24">
           <span className="inline-flex items-center gap-1.5 rounded-full bg-slate-50 px-3 py-1 text-[11px] font-bold uppercase tracking-widest text-slate-500 border border-slate-200/80 mb-5">
-            <HelpCircle className="h-3 w-3 text-slate-400" /> Support Desk
+            <HelpCircle className="h-3 w-3 text-slate-400" /> FAQ
           </span>
           <h2 className="text-4xl sm:text-5xl font-black tracking-tight text-slate-900 leading-[1.1]">
             Frequently Asked <br />
@@ -55,7 +51,7 @@ export default function FAQ() {
             </span>
           </h2>
           <p className="mt-5 text-base text-slate-500 leading-relaxed">
-            Got questions about onboarding, feature migrations, or security configurations? Find instant clear telemetry below.
+            Everything you need to know about getting started with stackmsp.
           </p>
         </div>
 
@@ -121,14 +117,48 @@ export default function FAQ() {
           })}
         </div>
 
-        {/* Clean, Premium Footnote CTA */}
-        <div className="mt-16 text-center pt-8 border-t border-slate-100">
-          <p className="text-sm font-medium text-slate-600">
-            Can&apos;t find the exact technical specifications you need?{" "}
-            <button className="text-blue-600 font-bold hover:text-blue-700 underline underline-offset-4 decoration-2 transition-colors">
-              Speak with an infrastructure engineer →
-            </button>
-          </p>
+        {/* Final CTA Section */}
+        <div className="mt-20 text-center">
+          <div className="bg-gradient-to-br from-slate-50 to-blue-50/50 rounded-3xl border border-slate-200/80 p-12 sm:p-16">
+            <h3 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
+              Ready to Simplify Your <br />
+              <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                MSP Operations?
+              </span>
+            </h3>
+            <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
+              Join hundreds of service providers who are saving time and growing faster with stackmsp.
+            </p>
+            
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+              <Link
+                href="/trial"
+                className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-blue-600/25 hover:shadow-blue-600/40 hover:bg-blue-700 transition-all duration-200"
+              >
+                Start Your Free 30-Day Trial
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                href="#"
+                className="inline-flex items-center gap-2 rounded-lg border-2 border-slate-200 bg-white px-8 py-3.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 hover:border-slate-300 transition-all duration-200"
+              >
+                Schedule a Personalized Demo
+              </Link>
+            </div>
+
+            {/* Trust Bar */}
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-6 text-sm text-slate-500">
+              <span className="flex items-center gap-2">
+                <Shield className="h-4 w-4 text-emerald-500" />
+                Secure payments
+              </span>
+              <span className="w-px h-5 bg-slate-200 hidden sm:block" />
+              <span className="flex items-center gap-2">
+                <CreditCard className="h-4 w-4 text-emerald-500" />
+                30-day money-back guarantee
+              </span>
+            </div>
+          </div>
         </div>
 
       </div>

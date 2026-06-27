@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Check, ShieldCheck, Zap, Database, ArrowRight, Sparkles, Globe, Layers } from "lucide-react";
+import { Check, ShieldCheck, Zap, Database, ArrowRight, Sparkles, Globe, Layers, FileText, Monitor, Users } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function SolutionsPage() {
@@ -13,8 +13,8 @@ export default function SolutionsPage() {
       desc: "Remove manual calculations from client invoicing. Our PSA solution directly connects device tracking logs to your billing engine, matching tier contracts.",
       icon: Zap,
       benefits: ["Automated billing profiles", "Prorated adjustments", "Direct QuickBooks & Xero Sync"],
-      image: "/dashboard-Customer-Lifecycle.png",
-      imageAlt: "Consolidated Billing workspace preview",
+      image: "/invoice-image.png",
+      imageAlt: "Consolidated Billing workspace preview - Invoice management",
       color: "blue",
       tag: "Finance",
       stats: "83% faster billing",
@@ -24,8 +24,8 @@ export default function SolutionsPage() {
       desc: "Get immediate endpoint alerts without keeping tabs open across three browser screens. Alerts are automatically logged directly into the CRM database as trackable status tickets.",
       icon: ShieldCheck,
       benefits: ["Instant alerts feed", "Custom automation actions", "Continuous state monitoring"],
-      image: "/all-Customer.png",
-      imageAlt: "Unified RMM Monitoring workspace preview",
+      image: "/rmm-monitoring.png",
+      imageAlt: "Unified RMM Monitoring workspace preview - Endpoint monitoring dashboard",
       color: "purple",
       tag: "Monitoring",
       stats: "99.9% uptime",
@@ -35,8 +35,8 @@ export default function SolutionsPage() {
       desc: "Ensure seamless handoffs between sales leads and service provisioning. Unified workspaces sync client status profiles across every module instantly.",
       icon: Database,
       benefits: ["Smooth lead onboarding", "Shared client profile timeline", "Comprehensive activity logs"],
-      image: "/Employees.png",
-      imageAlt: "Integrated CRM Pipelines workspace preview",
+      image: "/crm-pipeline.png",
+      imageAlt: "Integrated CRM Pipelines workspace preview - Sales pipeline dashboard",
       color: "emerald",
       tag: "CRM",
       stats: "2x faster onboarding",
@@ -86,7 +86,7 @@ export default function SolutionsPage() {
     <div className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/50 py-16 sm:py-24 overflow-hidden">
       {/* Background Decorative Elements */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-blue/5 rounded-full blur-3xl" />
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-500/5 rounded-full blur-3xl" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-emerald-500/3 rounded-full blur-3xl" />
       </div>
@@ -99,13 +99,13 @@ export default function SolutionsPage() {
           transition={{ duration: 0.7 }}
           className="text-center max-w-4xl mx-auto mb-20"
         >
-          <div className="inline-flex items-center gap-2 bg-brand-blue/10 text-brand-blue px-4 py-1.5 rounded-full text-xs font-semibold mb-6 border border-brand-blue/20">
+          <div className="inline-flex items-center gap-2 bg-blue-500/10 text-blue-600 px-4 py-1.5 rounded-full text-xs font-semibold mb-6 border border-blue-500/20">
             <Sparkles className="h-3.5 w-3.5" />
             Bespoke Solutions
           </div>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 leading-[1.1]">
             Custom Solutions for <br />
-            <span className="text-brand-blue">Operational Harmony</span>
+            <span className="text-blue-600">Operational Harmony</span>
           </h1>
           <p className="mt-4 text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
             Engineered to streamline business processes, maximize time savings, 
@@ -114,10 +114,11 @@ export default function SolutionsPage() {
         </motion.div>
 
         {/* Premium Solutions Cards */}
-        <div className="space-y-24">
+        <div className="space-y-32">
           {solutions.map((sol, index) => {
             const Icon = sol.icon;
             const colors = getColorStyles(sol.color);
+            // Alternate layout: even index = image right, odd index = image left
             const isEven = index % 2 === 0;
 
             return (
@@ -127,7 +128,7 @@ export default function SolutionsPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.7, delay: index * 0.15 }}
-                className={`relative flex flex-col lg:flex-row items-center gap-12 lg:gap-16 ${
+                className={`relative flex flex-col lg:flex-row items-center gap-16 lg:gap-20 ${
                   isEven ? "" : "lg:flex-row-reverse"
                 }`}
               >
@@ -136,8 +137,8 @@ export default function SolutionsPage() {
                   {String(index + 1).padStart(2, '0')}
                 </div>
 
-                {/* Content Side */}
-                <div className="flex-1 space-y-6 relative z-10">
+                {/* Content Side - with more padding and spacing */}
+                <div className="flex-1 space-y-6 relative z-10 pr-0 lg:pr-8">
                   {/* Tag and Icon Row */}
                   <div className="flex items-center gap-4">
                     <div className={`flex h-14 w-14 items-center justify-center rounded-2xl ${colors.iconBg} ${colors.iconText} shadow-lg ${colors.shadow}`}>
@@ -192,7 +193,7 @@ export default function SolutionsPage() {
                     </div>
                     <Link 
                       href="/contact" 
-                      className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-blue hover:gap-2.5 transition-all duration-300 group"
+                      className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-600 hover:gap-2.5 transition-all duration-300 group"
                     >
                       Learn more
                       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -211,7 +212,7 @@ export default function SolutionsPage() {
                     <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${colors.gradient} z-10`} />
                     
                     {/* Image Container */}
-                    <div className="relative w-full h-[320px] bg-slate-100">
+                    <div className="relative w-full h-[340px] bg-slate-100">
                       <Image
                         src={sol.image}
                         alt={sol.imageAlt}
@@ -234,19 +235,6 @@ export default function SolutionsPage() {
                         </div>
                       </div>
                     </div>
-
-                    {/* Card Footer */}
-                    {/* <div className="bg-white/80 backdrop-blur-sm px-6 py-3 border-t border-slate-100/50">
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs text-slate-400 font-mono">
-                          {sol.title.split(" ")[0]} · Workspace preview
-                        </span>
-                        <span className="flex items-center gap-1.5 text-xs text-slate-400">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                          Active
-                        </span>
-                      </div>
-                    </div> */}
                   </div>
                 </motion.div>
               </motion.div>
@@ -263,7 +251,7 @@ export default function SolutionsPage() {
           className="mt-24 text-center"
         >
           <div className="relative inline-block">
-            <div className="absolute -inset-1 bg-gradient-to-r from-brand-blue to-purple-500 rounded-2xl blur opacity-30" />
+            <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-500 rounded-2xl blur opacity-30" />
             <div className="relative bg-white rounded-2xl px-8 py-6 border border-slate-200/80 shadow-xl">
               <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8">
                 <div className="flex items-center gap-3">
@@ -279,7 +267,7 @@ export default function SolutionsPage() {
                 <div className="w-px h-8 bg-slate-200 hidden sm:block" />
                 <Link
                   href="/trial"
-                  className="group inline-flex items-center gap-2 rounded-xl bg-brand-blue px-6 py-3 text-sm font-bold text-white shadow-lg shadow-brand-blue/25 hover:shadow-brand-blue/40 hover:bg-brand-blue/95 transition-all duration-200"
+                  className="group inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-blue-600/25 hover:shadow-blue-600/40 hover:bg-blue-700 transition-all duration-200"
                 >
                   Start Your Free Trial
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
