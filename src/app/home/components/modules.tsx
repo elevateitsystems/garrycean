@@ -13,61 +13,62 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function Modules() {
   const capabilities = [
     {
       title: "Centralized Client Hub",
-      desc: "Store all client information, contacts, and history in one organized database. Give clients secure portal access to view their services, documents, and tickets.",
+      desc: "Store all client information, contacts, service history, and documents in one secure database. Give clients instant access through a professional self-service portal.",
       icon: Users,
-      className: "md:col-span-2 lg:col-span-2", // Premium Bento feature sizing
+      className: "md:col-span-2 lg:col-span-2",
       gradient: "from-blue-500/10 to-indigo-500/10",
     },
     {
-      title: "Smart Contract Creation",
-      desc: "Generate professional contracts with our built-in rich text editor or upload templates. Track status, renewal dates, and automate notifications.",
+      title: "Smart Contracts",
+      desc: "Build professional contracts with our rich text editor or upload templates. Track status, renewals, and approvals automatically.",
       icon: FileText,
       className: "md:col-span-1 lg:col-span-1",
       gradient: "from-purple-500/10 to-pink-500/10",
     },
     {
       title: "Automated Invoicing",
-      desc: "Create detailed invoices in seconds, link them to contracts, and track payment status seamlessly.",
+      desc: "Create detailed invoices in seconds, link them to contracts, and set up recurring billing. Track payments and reduce errors.",
       icon: CreditCard,
       className: "md:col-span-1 lg:col-span-1",
       gradient: "from-emerald-500/10 to-teal-500/10",
     },
     {
-      title: "Win More Deals",
-      desc: "Build stunning proposals and quotes with a drag-and-drop editor. Convert accepted proposals into contracts with one click.",
+      title: "Powerful Proposals",
+      desc: "Design beautiful quotes and proposals with drag-and-drop ease. Track when clients view them and convert wins into contracts instantly.",
       icon: Award,
       className: "md:col-span-1 lg:col-span-1",
       gradient: "from-amber-500/10 to-orange-500/10",
     },
     {
-      title: "Real-Time Insights",
-      desc: "Get instant visibility into revenue, client growth, outstanding invoices, and team performance. Interactive charts and customizable widgets put your KPIs front and center.",
+      title: "Real-Time Analytics",
+      desc: "Get instant visibility into revenue, client growth, outstanding invoices, and team performance with customizable dashboards and reports.",
       icon: LineChart,
       className: "md:col-span-2 lg:col-span-2",
       gradient: "from-cyan-500/10 to-blue-500/10",
     },
     {
-      title: "Empower Your Team",
-      desc: "Manage employees, assign roles, and use Kanban boards to organize projects and keep everyone aligned.",
+      title: "Team & Project Management",
+      desc: "Assign roles, manage permissions, and use Kanban boards to keep projects and workloads organized.",
       icon: Group,
       className: "md:col-span-1 lg:col-span-1",
       gradient: "from-violet-500/10 to-purple-500/10",
     },
     {
-      title: "Self-Service Portal",
-      desc: "Give clients 24/7 access to their documents, contracts, and account information to significantly reduce back-and-forth emails.",
+      title: "Self-Service Client Portal",
+      desc: "Give clients 24/7 access to documents, contracts, tickets, and your knowledge base — reducing back-and-forth emails and boosting satisfaction.",
       icon: ShieldAlert,
       className: "md:col-span-1 lg:col-span-2",
       gradient: "from-rose-500/10 to-red-500/10",
     },
     {
       title: "Knowledge Base",
-      desc: "Build a comprehensive help center with articles, guides, and FAQs. Empower clients to find answers instantly.",
+      desc: "Build a comprehensive help center with articles, guides, and FAQs. Empower clients to find answers instantly and reduce support tickets.",
       icon: BookOpen,
       className: "md:col-span-1 lg:col-span-2",
       gradient: "from-fuchsia-500/10 to-violet-500/10",
@@ -99,8 +100,8 @@ export default function Modules() {
             </span>
           </h2>
           <p className="mt-6 text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
-            From client onboarding to final invoice, StackMSP handles it all
-            with powerful features designed for modern service providers.
+            From first contact to final invoice, stackmsp streamlines your entire 
+            operation with powerful, easy-to-use tools built specifically for service providers.
           </p>
         </motion.div>
 
@@ -159,6 +160,23 @@ export default function Modules() {
               </motion.div>
             );
           })}
+        </motion.div>
+
+        {/* CTA after features */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="text-center mt-16"
+        >
+          <Link
+            href="/features"
+            className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-blue-600/25 hover:shadow-blue-600/40 hover:bg-blue-700 transition-all duration-200"
+          >
+            Explore All Features
+            <ArrowUpRight className="h-4 w-4" />
+          </Link>
         </motion.div>
       </div>
     </section>

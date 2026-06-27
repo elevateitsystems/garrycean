@@ -22,11 +22,13 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  
+
   const navLinks = [
     { href: "/solutions", label: "Solutions" },
     { href: "/features", label: "Features" },
     { href: "/pricing", label: "Pricing" },
+    { href: "/resources", label: "Resources" },
+    { href: "/company", label: "Company" },
     { href: "/contact", label: "Contact" },
   ];
 
@@ -35,7 +37,6 @@ export default function Navbar() {
   };
 
   return (
-    /* Increased container tracking weight from h-20 to h-24 to hold a larger structural frame */
     <div className="fixed top-0 left-0 right-0 z-50 w-full px-6 lg:px-8 pt-5 transition-all duration-300 pointer-events-none h-24">
       <header 
         className={`mx-auto max-w-[1470px] w-full pointer-events-auto rounded-full border transition-all duration-500 flex items-center ${
@@ -46,7 +47,7 @@ export default function Navbar() {
       >
         <div className="flex w-full items-center justify-between relative">
           
-          {/* Logo Container with weighted sizing */}
+          {/* Logo Container */}
           <div className="flex items-center shrink-0">
             <Link href="/" className="flex items-center relative group">
               <Image
@@ -60,7 +61,7 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Centered Navigation Track with increased padding weights */}
+          {/* Centered Navigation Track */}
           <nav className="hidden md:flex items-center p-2 bg-slate-50 rounded-full border border-slate-200/80 absolute left-1/2 -translate-x-1/2 shadow-inner">
             {navLinks.map((link) => {
               const active = isActive(link.href);
@@ -73,7 +74,6 @@ export default function Navbar() {
                   }`}
                 >
                   {link.label}
-                  {/* Background pill morph animation */}
                   {active && (
                     <motion.div
                       layoutId="activeNavIndicator"
@@ -86,13 +86,15 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* Right Action Hub with weighted action buttons */}
+          {/* Right Action Hub */}
           <div className="flex items-center gap-4 shrink-0">
-            {/* Bold Tech Telemetry Tag */}
-            <div className="hidden lg:flex items-center gap-2 px-4 py-2 rounded-full bg-slate-50 border border-slate-200 text-[10px] font-mono font-black text-slate-600 uppercase tracking-wider select-none">
-              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-              SYSTEM_OK
-            </div>
+            {/* Login Button */}
+            <Link
+              href="#"
+              className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-2.5 text-xs font-black uppercase tracking-widest text-slate-950 shadow-sm hover:bg-slate-50 border border-slate-200 hover:border-slate-300 active:scale-[0.97] transition-all duration-300"
+            >
+              Log In
+            </Link>
 
             <Link
               href="/trial"

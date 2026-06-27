@@ -115,7 +115,7 @@ export default function CommandCenter() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12 max-w-5xl mx-auto"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12 max-w-[1150px] mx-auto"
         >
           {stats.map((stat, index) => {
             const Icon = stat.icon;
@@ -202,7 +202,7 @@ export default function CommandCenter() {
               <div className="relative w-full bg-slate-950/5">
                 <div className="relative w-full aspect-[16/9] overflow-hidden">
                   <Image
-                    src="/dashboard-demo.png"
+                    src="/dashboard-preview.png"
                     alt="StackMSP Dashboard Preview"
                     fill
                     className="object-contain transition-transform duration-1000 hover:scale-105"
