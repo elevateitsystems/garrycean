@@ -5,8 +5,10 @@ import {
   FaTwitter, 
   FaLinkedin, 
   FaGithub, 
-  FaArrowRight 
+  FaArrowRight,
+  FaYoutube
 } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 export default function Footer() {
   return (
@@ -30,18 +32,20 @@ export default function Footer() {
               Client management, contracts, invoicing, proposals, and analytics — unified.
             </p>
 
-            {/* Social Links */}
+            {/* Social Links - Updated with YouTube and X */}
             <div className="flex gap-4 pt-4">
               {[
-                { icon: FaTwitter, href: "#" },
-                { icon: FaLinkedin, href: "#" },
-                { icon: FaGithub, href: "#" },
+                { icon: FaXTwitter, href: "#", label: "X" },
+                { icon: FaLinkedin, href: "#", label: "LinkedIn" },
+                { icon: FaGithub, href: "#", label: "GitHub" },
+                { icon: FaYoutube, href: "#", label: "YouTube" },
               ].map((social, i) => (
                 <a
                   key={i}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={social.label}
                   className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 flex items-center justify-center transition-all hover:scale-110 border border-white/10 hover:border-white/20"
                 >
                   <social.icon className="w-5 h-5" />
@@ -50,8 +54,8 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Navigation */}
-          <div className="lg:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-10">
+          {/* Navigation - Fixed spacing */}
+          <div className="lg:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-10 lg:gap-12">
             {/* Solutions */}
             <div>
               <h3 className="text-sm font-semibold tracking-widest uppercase text-white mb-6">
@@ -113,8 +117,8 @@ export default function Footer() {
                 {[
                   { name: "Documentation", href: "#" },
                   { name: "Help Center", href: "#" },
-                  { name: "Blog", href: "#" },
-                  { name: "Free Trial", href: "#" },
+                  { name: "Blog", href: "/company" },
+                  { name: "Free Trial", href: "/trial" },
                 ].map((item) => (
                   <li key={item.name}>
                     <Link
@@ -136,11 +140,11 @@ export default function Footer() {
               </h3>
               <ul className="space-y-3 text-[15px]">
                 {[
-                  { name: "Privacy Policy", href: "/privacy" },
-                  { name: "Terms of Service", href: "/terms" },
-                  { name: "Cookie Policy", href: "/cookies" },
-                  { name: "GDPR Compliance", href: "/gdpr" },
-                  { name: "Data Processing Agreement", href: "/dpa" },
+                  { name: "Privacy Policy", href: "#" },
+                  { name: "Terms of Service", href: "#" },
+                  { name: "Cookie Policy", href: "#" },
+                  { name: "GDPR Compliance", href: "#" },
+                  { name: "Data Processing Agreement", href: "#" },
                 ].map((item) => (
                   <li key={item.name}>
                     <Link

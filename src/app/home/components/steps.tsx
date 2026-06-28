@@ -32,9 +32,9 @@ export default function Steps() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-7xl h-[600px] bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.03),transparent_65%)] pointer-events-none -z-10" />
 
       <div className="mx-auto container px-6 lg:px-8">
-        
+
         {/* Centered Header */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -48,14 +48,15 @@ export default function Steps() {
             </span>
             <span className="text-[10px] font-bold text-blue-600 uppercase tracking-widest">Onboarding Pipeline</span>
           </div>
-          
-          <h2 className="text-4xl sm:text-6xl font-black tracking-tight text-slate-900 leading-[1.1]">
-            Get Your Entire MSP Operation <br />
+
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 leading-[1.2]">
+            <span className="whitespace-nowrap">Get Your Entire MSP Operation</span>
+            <br />
             <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
               Running In Less Than An Hour
             </span>
           </h2>
-          
+
           <p className="text-base sm:text-lg text-slate-500 max-w-xl mx-auto leading-relaxed">
             Transition smoothly to a unified dashboard without interrupting active customer contracts or billing streams.
           </p>
@@ -66,7 +67,7 @@ export default function Steps() {
           {/* Timeline Connector Line (Hidden on Mobile) */}
           <div className="absolute top-[52px] left-[10%] right-[10%] h-px bg-gradient-to-r from-slate-200 via-slate-300 to-slate-200 hidden lg:block -z-10" />
 
-          <motion.div 
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
@@ -86,8 +87,8 @@ export default function Steps() {
                   key={index}
                   variants={{
                     hidden: { opacity: 0, y: 40 },
-                    visible: { 
-                      opacity: 1, 
+                    visible: {
+                      opacity: 1,
                       y: 0,
                       transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] }
                     },

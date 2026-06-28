@@ -94,7 +94,7 @@ export default function Modules() {
             Platform Capabilities
           </span>
           <h2 className="text-4xl sm:text-6xl font-black text-white tracking-tight leading-none">
-            Everything Your MSP Needs, <br />
+            Everything Your MSP Needs{" "}
             <span className="bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
               All in One Place
             </span>

@@ -20,7 +20,9 @@ import {
   BarChart3,
   FileText,
   Briefcase,
-  Layers
+  Layers,
+  Target,
+  Award
 } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -41,7 +43,7 @@ export default function ResourcesPage() {
       date: "June 23, 2026",
       readTime: "8 min read",
       author: "The stackmsp Team",
-      image: "/stackmsp-landing.jpg",
+      image: "/resources-admin-time.jpg",
       slug: "reduce-admin-time",
       featured: true,
     },
@@ -52,7 +54,7 @@ export default function ResourcesPage() {
       date: "June 18, 2026",
       readTime: "12 min read",
       author: "The stackmsp Team",
-      image: "/stackmsp-landing.jpg",
+      image: "/resources-contract-guide.jpg",
       slug: "msp-contract-templates",
       featured: false,
     },
@@ -63,8 +65,20 @@ export default function ResourcesPage() {
       date: "June 12, 2026",
       readTime: "6 min read",
       author: "The stackmsp Team",
-      image: "/dashboard-preview.png",
+      image: "/resources-metrics.jpg",
       slug: "msp-metrics",
+      featured: false,
+    },
+    // New card added
+    {
+      title: "How to Build a High-Performing MSP Team",
+      excerpt: "Strategies for hiring, training, and retaining top talent in your managed services business.",
+      category: "Business Growth",
+      date: "June 8, 2026",
+      readTime: "10 min read",
+      author: "The stackmsp Team",
+      image: "/resources-team-building.jpg",
+      slug: "build-msp-team",
       featured: false,
     },
   ];
@@ -186,7 +200,7 @@ export default function ResourcesPage() {
           </div>
         </motion.div>
 
-        {/* Featured Article */}
+        {/* Featured Article - Updated Image */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -195,15 +209,16 @@ export default function ResourcesPage() {
         >
           <div className="bg-white rounded-3xl border border-slate-200/80 shadow-xl overflow-hidden group hover:shadow-2xl transition-shadow duration-300">
             <div className="grid md:grid-cols-2 gap-0">
-              {/* Image Side */}
+              {/* Image Side - Updated with new image */}
               <div className="relative h-64 md:h-auto bg-slate-100 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 to-transparent z-10" />
                 <Image
-                  src="/dashboard-preview.png"
+                  src="/resources-admin-time.jpg"
                   alt="How to Reduce Admin Time by 15 Hours Per Week"
                   width={600}
                   height={400}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  priority
                 />
                 <div className="absolute top-4 left-4 z-20">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 text-white text-xs font-bold rounded-full">
@@ -258,7 +273,7 @@ export default function ResourcesPage() {
           </div>
         </motion.div>
 
-        {/* Article Grid */}
+        {/* Article Grid - Updated with all 4 articles (3 original + 1 new) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {articles.slice(1).map((article, idx) => {
             const categoryColors = getColorClasses(
@@ -282,6 +297,7 @@ export default function ResourcesPage() {
                     width={400}
                     height={250}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    quality={90}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 to-transparent" />
                   <div className={`absolute top-3 left-3 px-2.5 py-1 rounded-full text-xs font-bold ${categoryColors.bg} ${categoryColors.text} border ${categoryColors.border}`}>

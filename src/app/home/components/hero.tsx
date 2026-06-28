@@ -120,14 +120,27 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* Right Side - Dashboard Image (Updated) */}
+          {/* Right Side - Dashboard Image with Tilt Animation - FIXED */}
           <motion.div 
             initial={{ opacity: 0, x: 60, scale: 0.95 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
             className="flex-1 relative w-full max-w-2xl"
+            style={{ perspective: "1000px" }}
           >
-            <div className="relative rounded-xl border border-slate-200/80 bg-white shadow-2xl shadow-slate-200/50 overflow-hidden">
+            <motion.div 
+              animate={{
+                rotateY: [0, -5, 5, -5, 0],
+              }}
+              transition={{
+                duration: 6,
+                repeat: Infinity,
+                repeatType: "loop",
+                ease: "easeInOut",
+                delay: 0.5
+              }}
+              className="relative rounded-xl border border-slate-200/80 bg-white shadow-2xl shadow-slate-200/50 overflow-hidden"
+            >
               {/* Dashboard Image */}
               <Image
                 src="/dashboard-preview.png"
@@ -140,7 +153,7 @@ export default function Hero() {
               
               {/* Optional: Overlay gradient for better text readability if needed */}
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900/5 to-transparent pointer-events-none" />
-            </div>
+            </motion.div>
 
             {/* Floating Badge */}
             <motion.div 
