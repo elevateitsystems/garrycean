@@ -74,7 +74,7 @@ export default function Hero() {
 
               <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                 <Link
-                  href="/demo"
+                  href="#"
                   className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-slate-200 bg-white px-8 py-3.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 hover:border-slate-300 transition-all duration-200"
                 >
                   <Play className="h-4 w-4" />
@@ -120,20 +120,21 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* Right Side - Dashboard Image with Tilt Animation - FIXED */}
+          {/* Right Side - Dashboard Image with Enhanced Tilt Animation */}
           <motion.div 
             initial={{ opacity: 0, x: 60, scale: 0.95 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
             className="flex-1 relative w-full max-w-2xl"
-            style={{ perspective: "1000px" }}
+            style={{ perspective: "1200px" }}
           >
             <motion.div 
               animate={{
-                rotateY: [0, -5, 5, -5, 0],
+                rotateY: [0, -8, 8, -8, 0],
+                rotateX: [0, 2, -2, 2, 0],
               }}
               transition={{
-                duration: 6,
+                duration: 5,
                 repeat: Infinity,
                 repeatType: "loop",
                 ease: "easeInOut",
@@ -153,6 +154,9 @@ export default function Hero() {
               
               {/* Optional: Overlay gradient for better text readability if needed */}
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900/5 to-transparent pointer-events-none" />
+              
+              {/* Shadow effect on tilt */}
+              <div className="absolute inset-0 shadow-inner pointer-events-none" />
             </motion.div>
 
             {/* Floating Badge */}

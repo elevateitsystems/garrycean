@@ -43,7 +43,7 @@ export default function ResourcesPage() {
       date: "June 23, 2026",
       readTime: "8 min read",
       author: "The stackmsp Team",
-      image: "/resources-admin-time.jpg",
+      image: "",
       slug: "reduce-admin-time",
       featured: true,
     },
@@ -213,7 +213,7 @@ export default function ResourcesPage() {
               <div className="relative h-64 md:h-auto bg-slate-100 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 to-transparent z-10" />
                 <Image
-                  src="/resources-admin-time.jpg"
+                  src="/company-story.jpg"
                   alt="How to Reduce Admin Time by 15 Hours Per Week"
                   width={600}
                   height={400}

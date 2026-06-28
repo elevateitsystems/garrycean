@@ -16,14 +16,14 @@ export default function Footer() {
       <div className="mx-auto container px-6 py-16 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* Brand Section */}
-          <div className="lg:col-span-4 space-y-6">
+          <div className="lg:col-span-3 space-y-6">
             <Link href="/" className="flex items-center gap-3 group">
               <Image
-                src="/logo.png"
+                src="/footer-logo/footer-logo.png"
                 alt="StackMSP Logo"
                 width={140}
-                height={45}
-                className="bg-white rounded-full h-14 w-auto object-contain transition-transform group-hover:scale-105"
+                height={50}
+                className="h-16 w-auto object-contain transition-transform group-hover:scale-105"
               />
             </Link>
 
@@ -54,8 +54,8 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Navigation - Fixed spacing */}
-          <div className="lg:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-10 lg:gap-12">
+          {/* Navigation - Fixed spacing with equal columns */}
+          <div className="lg:col-span-9 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
             {/* Solutions */}
             <div>
               <h3 className="text-sm font-semibold tracking-widest uppercase text-white mb-6">

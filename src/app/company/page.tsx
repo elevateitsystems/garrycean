@@ -57,18 +57,21 @@ export default function CompanyPage() {
       role: "CEO",
       bio: "Visionary leader with deep expertise in MSP operations and business growth.",
       initials: "SA",
+      image: "/resources-admin-time.jpg",
     },
     {
       name: "Julien Odil",
       role: "CFO",
       bio: "Financial strategist ensuring sustainable growth and operational excellence.",
       initials: "JO",
+      image: "/default-img.jpeg",
     },
     {
       name: "Laurie Carius",
       role: "Head of Customer Success",
       bio: "Dedicated to ensuring every MSP gets maximum value from the platform.",
       initials: "LC",
+      image: "/default-img.jpeg",
     },
   ];
 
@@ -209,7 +212,7 @@ export default function CompanyPage() {
             {/* Image added below the text */}
             <div className="mt-8 rounded-2xl overflow-hidden border border-slate-200/50 shadow-lg">
               <Image
-                src="/company-story.jpg"
+                src="/resources-admin-time.jpg"
                 alt="stackmsp team working together"
                 width={1200}
                 height={500}
@@ -247,7 +250,7 @@ export default function CompanyPage() {
           </div>
         </motion.div>
 
-        {/* Meet the Team - Updated with Samuel, Julien, Laurie */}
+        {/* Meet the Team - Updated with Samuel, Julien, Laurie with images */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -274,9 +277,21 @@ export default function CompanyPage() {
                 className="bg-white rounded-2xl border border-slate-200/80 p-6 text-center shadow-sm hover:shadow-lg transition-all hover:-translate-y-1 group"
               >
                 <div className="relative mx-auto mb-4">
-                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-2xl mx-auto">
-                    {member.initials}
-                  </div>
+                  {member.image ? (
+                    <div className="w-20 h-20 rounded-full overflow-hidden mx-auto border-2 border-slate-200 group-hover:border-blue-400 transition-all duration-300">
+                      <Image
+                        src={member.image}
+                        alt={member.name}
+                        width={80}
+                        height={80}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  ) : (
+                    <div className="w-20 h-20 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-2xl mx-auto">
+                      {member.initials}
+                    </div>
+                  )}
                   <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-emerald-500 border-2 border-white flex items-center justify-center">
                     <CheckCircle2 className="h-3.5 w-3.5 text-white" />
                   </div>
