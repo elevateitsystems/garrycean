@@ -11,8 +11,9 @@ export default function PricingPage() {
   const plans = [
     {
       name: "Starter",
-      price: isAnnual ? "$71.99" : "$89.99",
-      period: isAnnual ? "/month" : "/month",
+      monthlyPrice: "$99.99",
+      annualPrice: "$89.99",
+      period: "/month",
       desc: "For solo consultants & small teams",
       features: [
         "1 super admin",
@@ -26,7 +27,7 @@ export default function PricingPage() {
       cta: "Start Free Trial",
       popular: true,
       color: "blue",
-      savings: "Save 20% with annual billing",
+      savings: "Save 10% with annual billing",
     },
     {
       name: "Enterprise",
@@ -57,19 +58,19 @@ export default function PricingPage() {
     { role: "Super Admin", first5: "$109.99", next5: "$99.99", plus11: "$79.99" },
   ];
 
-  // Feature Comparison Table
+  // Feature Comparison Table - Updated with Starter including more features
   const comparisonFeatures = [
     { feature: "Clients", starter: "Up to 10", enterprise: "Unlimited" },
     { feature: "Client Self-Service Portal", starter: "✓", enterprise: "✓" },
     { feature: "Contracts & Templates", starter: "Basic", enterprise: "Advanced + API" },
     { feature: "Automated Invoicing", starter: "Basic", enterprise: "Full" },
     { feature: "Proposals & e-Signatures", starter: "✓", enterprise: "✓" },
-    { feature: "Team Management & Kanban", starter: "—", enterprise: "✓" },
+    { feature: "Team Management & Kanban", starter: "✓", enterprise: "✓" },
     { feature: "Real-Time Analytics", starter: "Basic", enterprise: "Custom" },
-    { feature: "Custom Branding", starter: "—", enterprise: "✓" },
-    { feature: "API & Integrations", starter: "—", enterprise: "Full" },
+    { feature: "Custom Branding", starter: "✓", enterprise: "✓" },
+    { feature: "API & Integrations", starter: "✓", enterprise: "Full" },
     { feature: "Support", starter: "Email", enterprise: "Dedicated" },
-    { feature: "Onboarding Assistance", starter: "—", enterprise: "Full Training" },
+    { feature: "Onboarding Assistance", starter: "✓", enterprise: "Full Training" },
   ];
 
   const getColorStyles = (color: string) => {
@@ -128,7 +129,7 @@ export default function PricingPage() {
             Start free. Scale as you grow. All plans include core features with no hidden fees.
           </p>
 
-          {/* Toggle */}
+          {/* Toggle - Updated with 10% savings */}
           <div className="inline-flex items-center gap-3 mt-8 bg-white rounded-full p-1.5 border border-slate-200/80 shadow-sm">
             <button 
               onClick={() => setIsAnnual(false)}
@@ -148,7 +149,7 @@ export default function PricingPage() {
                   : "text-slate-500 hover:text-slate-700"
               }`}
             >
-              Annual <span className="text-xs text-emerald-500">Save 20%</span>
+              Annual <span className="text-xs text-emerald-500">Save 10%</span>
             </button>
           </div>
         </motion.div>
@@ -157,6 +158,8 @@ export default function PricingPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {plans.map((plan, index) => {
             const colors = getColorStyles(plan.color);
+            // Get the current price based on billing cycle
+            const currentPrice = isAnnual ? plan.annualPrice : plan.monthlyPrice;
             
             return (
               <motion.div
@@ -196,10 +199,16 @@ export default function PricingPage() {
                     <p className="mt-1 text-sm text-slate-500">{plan.desc}</p>
                     
                     <div className="mt-4 flex items-baseline gap-1">
-                      <span className="text-4xl font-black tracking-tight text-slate-900">{plan.price}</span>
-                      <span className="text-sm font-semibold text-slate-500">{plan.period}</span>
+                      {plan.isEnterprise ? (
+                        <span className="text-4xl font-black tracking-tight text-slate-900">{plan.price}</span>
+                      ) : (
+                        <>
+                          <span className="text-4xl font-black tracking-tight text-slate-900">{currentPrice}</span>
+                          <span className="text-sm font-semibold text-slate-500">{plan.period}</span>
+                        </>
+                      )}
                     </div>
-                    {plan.savings && isAnnual && (
+                    {plan.savings && isAnnual && !plan.isEnterprise && (
                       <span className="text-xs text-emerald-600 font-semibold">{plan.savings}</span>
                     )}
                   </div>
@@ -296,7 +305,7 @@ export default function PricingPage() {
           </div>
         </motion.div>
 
-        {/* Feature Comparison Table */}
+        {/* Feature Comparison Table - Updated */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -305,6 +314,9 @@ export default function PricingPage() {
         >
           <div className="text-center mb-8">
             <h3 className="text-2xl font-bold text-slate-900">Feature Comparison</h3>
+            <p className="text-sm text-slate-500 mt-1">
+              Everything you need to run your MSP efficiently
+            </p>
           </div>
           
           <div className="bg-white rounded-2xl border border-slate-200/80 shadow-lg overflow-hidden">
@@ -322,13 +334,13 @@ export default function PricingPage() {
                     <tr key={idx} className="border-b border-slate-100 last:border-0 hover:bg-slate-50/50 transition-colors">
                       <td className="px-6 py-3.5 text-sm font-medium text-slate-700">{row.feature}</td>
                       <td className={`px-6 py-3.5 text-sm text-center ${
-                        row.starter === "✓" ? "text-emerald-600" : 
+                        row.starter === "✓" ? "text-emerald-600 font-semibold" : 
                         row.starter === "—" ? "text-slate-300" : "text-slate-600"
                       }`}>
                         {row.starter}
                       </td>
                       <td className={`px-6 py-3.5 text-sm text-center ${
-                        row.enterprise === "✓" ? "text-emerald-600" : 
+                        row.enterprise === "✓" ? "text-emerald-600 font-semibold" : 
                         row.enterprise === "—" ? "text-slate-300" : "text-slate-600"
                       }`}>
                         {row.enterprise}

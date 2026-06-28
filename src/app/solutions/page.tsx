@@ -12,7 +12,7 @@ export default function SolutionsPage() {
       title: "Consolidated Billing",
       desc: "Remove manual calculations from client invoicing. Our PSA solution directly connects device tracking logs to your billing engine, matching tier contracts.",
       icon: Zap,
-      benefits: ["Automated billing profiles", "Prorated adjustments", "Direct QuickBooks & Xero Sync"],
+      benefits: ["Automated billing profiles", "Prorated adjustments", "Direct QuickBooks Sync"],
       image: "/invoice-image.png",
       imageAlt: "Consolidated Billing workspace preview - Invoice management",
       color: "blue",
@@ -139,17 +139,13 @@ export default function SolutionsPage() {
 
                 {/* Content Side - with more padding and spacing */}
                 <div className="flex-1 space-y-6 relative z-10 pr-0 lg:pr-8">
-                  {/* Tag and Icon Row */}
+                  {/* Tag and Icon Row - REMOVED "Module X" text */}
                   <div className="flex items-center gap-4">
                     <div className={`flex h-14 w-14 items-center justify-center rounded-2xl ${colors.iconBg} ${colors.iconText} shadow-lg ${colors.shadow}`}>
                       <Icon className="h-7 w-7" />
                     </div>
                     <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-bold ${colors.badge}`}>
                       {sol.tag}
-                    </span>
-                    <span className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-400">
-                      <Layers className="h-3 w-3" />
-                      Module {index + 1}
                     </span>
                   </div>
 
@@ -201,7 +197,7 @@ export default function SolutionsPage() {
                   </div>
                 </div>
 
-                {/* Image Side with Premium Card Design */}
+                {/* Image Side with Premium Card Design - Updated for better resolution */}
                 <motion.div 
                   className="flex-1 w-full max-w-lg"
                   whileHover={{ scale: 1.02 }}
@@ -211,13 +207,16 @@ export default function SolutionsPage() {
                     {/* Top Gradient Bar */}
                     <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${colors.gradient} z-10`} />
                     
-                    {/* Image Container */}
+                    {/* Image Container with better resolution handling */}
                     <div className="relative w-full h-[340px] bg-slate-100">
                       <Image
                         src={sol.image}
                         alt={sol.imageAlt}
                         fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        quality={95}
+                        priority={index === 0}
                       />
                       
                       {/* Overlay Gradient */}

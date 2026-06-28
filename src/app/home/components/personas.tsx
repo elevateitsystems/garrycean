@@ -235,18 +235,18 @@ export default function Personas() {
             </div>
             <span className="w-px h-6 bg-slate-200 hidden sm:block" />
             <div className="flex items-center gap-2">
-              <Users className="h-4 w-4 text-brand-blue" />
-              <span className="text-sm text-slate-600">
-                <span className="font-bold text-slate-900">2,000+</span> service providers
-              </span>
-            </div>
-            <span className="w-px h-6 bg-slate-200 hidden sm:block" />
-            <div className="flex items-center gap-2">
-              <Sparkles className="h-4 w-4 text-amber-400" />
-              <span className="text-sm text-slate-600">
-                <span className="font-bold text-brand-blue">100+</span> countries
-              </span>
-            </div>
+  <Users className="h-4 w-4 text-brand-blue" />
+  <span className="text-sm text-slate-600">
+    <span className="font-bold text-slate-900">20+</span> service providers
+  </span>
+</div>
+<span className="w-px h-6 bg-slate-200 hidden sm:block" />
+<div className="flex items-center gap-2">
+  <Sparkles className="h-4 w-4 text-amber-400" />
+  <span className="text-sm text-slate-600">
+    <span className="font-bold text-brand-blue">2+</span> countries
+  </span>
+</div>
           </div>
         </motion.div>
       </div>

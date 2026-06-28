@@ -89,12 +89,12 @@ export default function Navbar() {
           {/* Right Action Hub */}
           <div className="flex items-center gap-4 shrink-0">
             {/* Login Button */}
-            <Link
+            {/* <Link
               href="#"
               className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-2.5 text-xs font-black uppercase tracking-widest text-slate-950 shadow-sm hover:bg-slate-50 border border-slate-200 hover:border-slate-300 active:scale-[0.97] transition-all duration-300"
             >
               Log In
-            </Link>
+            </Link> */}
 
             <Link
               href="/trial"

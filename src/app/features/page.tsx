@@ -3,11 +3,30 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Zap, Shield, Workflow, Users, FileText, CreditCard, Award, Group, LineChart, Check, Cpu } from "lucide-react";
+import { 
+  ArrowRight, 
+  Zap, 
+  Shield, 
+  Workflow, 
+  Users, 
+  FileText, 
+  CreditCard, 
+  Award, 
+  Group, 
+  LineChart, 
+  Check, 
+  Cpu,
+  Database,
+  BookOpen,
+  Monitor,
+  Ticket,
+  Clock,
+  RefreshCw
+} from "lucide-react";
 import { motion } from "framer-motion";
 
-// Feature Detail Component
-function FeatureDetail({ title, desc, points, icon: Icon, color }: any) {
+// Feature Detail Component - Fixed for consistent card sizes
+function FeatureDetail({ title, desc, points, icon: Icon, color, cta, ctaLink }: any) {
   const colorClasses = {
     blue: "bg-blue-50 text-blue-600 border-blue-200",
     purple: "bg-purple-50 text-purple-600 border-purple-200",
@@ -15,19 +34,22 @@ function FeatureDetail({ title, desc, points, icon: Icon, color }: any) {
     amber: "bg-amber-50 text-amber-600 border-amber-200",
     rose: "bg-rose-50 text-rose-600 border-rose-200",
     cyan: "bg-cyan-50 text-cyan-600 border-cyan-200",
+    indigo: "bg-indigo-50 text-indigo-600 border-indigo-200",
+    orange: "bg-orange-50 text-orange-600 border-orange-200",
+    teal: "bg-teal-50 text-teal-600 border-teal-200",
   };
 
   const colors = colorClasses[color as keyof typeof colorClasses] || colorClasses.blue;
 
   return (
-    <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm hover:border-blue-300 hover:shadow-xl transition-all duration-300 group">
+    <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm hover:border-blue-300 hover:shadow-xl transition-all duration-300 group flex flex-col h-full">
       <div className="flex items-center gap-4 mb-6">
         <div className={`h-12 w-12 flex items-center justify-center rounded-2xl ${colors} transition-colors duration-300 group-hover:scale-110`}>
           <Icon className="h-6 w-6" />
         </div>
         <h3 className="text-xl font-bold text-slate-900">{title}</h3>
       </div>
-      <p className="text-slate-600 mb-6 text-sm leading-relaxed">{desc}</p>
+      <p className="text-slate-600 mb-6 text-sm leading-relaxed flex-grow">{desc}</p>
       <ul className="space-y-3">
         {points.map((pt: string, idx: number) => (
           <li key={idx} className="flex items-start gap-2 text-sm text-slate-600">
@@ -58,7 +80,7 @@ export default function FeaturesPage() {
       ctaLink: "/trial",
     },
     {
-      title: "Smart Contracts",
+      title: "Smart Contract Creation",
       desc: "Build professional contracts with our rich text editor or upload templates. Track status, renewals, and approvals automatically.",
       points: [
         "Built-in rich text editor or custom template uploads",
@@ -73,14 +95,14 @@ export default function FeaturesPage() {
       ctaLink: "/trial",
     },
     {
-      title: "Automated Invoicing & Billing",
-      desc: "Generate professional invoices instantly, link them to contracts, and automate recurring billing — so you get paid faster.",
+      title: "Billing Coordination",
+      desc: "Keep billing organized by connecting clients, contracts, and service details in stackmsp before preparing invoices in QuickBooks.",
       points: [
-        "One-click invoice creation from contracts or services",
-        "Recurring billing schedules",
-        "Multiple payment methods and custom line items",
-        "Payment tracking and automated reminders",
-        "Detailed reporting on receivables"
+        "Organize billable services by client and contract",
+        "Keep contract and billing details easy to reference",
+        "Prepare invoice-ready information for QuickBooks",
+        "Reduce missed charges and manual follow-ups",
+        "Improve visibility into client billing activity"
       ],
       icon: CreditCard,
       color: "emerald",
@@ -88,7 +110,7 @@ export default function FeaturesPage() {
       ctaLink: "/trial",
     },
     {
-      title: "Powerful Proposals",
+      title: "Win More Deals",
       desc: "Design beautiful quotes and proposals with drag-and-drop ease. Track when clients view them and convert wins into contracts instantly.",
       points: [
         "Drag-and-drop proposal builder",
@@ -103,7 +125,7 @@ export default function FeaturesPage() {
       ctaLink: "/trial",
     },
     {
-      title: "Team & Project Management",
+      title: "Empower Your Team",
       desc: "Assign tasks, manage workloads, and keep every project on track with powerful collaboration features designed for service teams.",
       points: [
         "Kanban boards for projects and tickets",
@@ -118,8 +140,8 @@ export default function FeaturesPage() {
       ctaLink: "/trial",
     },
     {
-      title: "Real-Time Analytics",
-      desc: "Get complete visibility into revenue, client health, team performance, and business metrics — all in customizable dashboards.",
+      title: "Real-Time Insights",
+      desc: "Track performance, client activity, sales, tickets, and operations with clear dashboards.",
       points: [
         "Interactive KPI dashboards",
         "Revenue and growth trends",
@@ -130,6 +152,96 @@ export default function FeaturesPage() {
       icon: LineChart,
       color: "cyan",
       cta: "Get Your Business Insights",
+      ctaLink: "/trial",
+    },
+    {
+      title: "Self-Service Portal",
+      desc: "Give clients a secure portal to submit requests, view updates, and manage information.",
+      points: [
+        "24/7 client access to documents and contracts",
+        "Ticket submission and status tracking",
+        "Knowledge base access",
+        "Secure document sharing",
+        "Client profile management"
+      ],
+      icon: Shield,
+      color: "indigo",
+      cta: "Enable Client Self-Service",
+      ctaLink: "/trial",
+    },
+    {
+      title: "Knowledge Base",
+      desc: "Store guides, SOPs, FAQs, and internal documentation in one easy-to-access place.",
+      points: [
+        "Article creation and organization",
+        "Searchable knowledge repository",
+        "Internal and external access controls",
+        "Version history for documents",
+        "Quick reference for support teams"
+      ],
+      icon: BookOpen,
+      color: "teal",
+      cta: "Build Your Knowledge Base",
+      ctaLink: "/trial",
+    },
+    {
+      title: "Asset & Device Management",
+      desc: "Track client devices, assets, users, warranties, and important system details.",
+      points: [
+        "Complete asset inventory and tracking",
+        "Warranty and license management",
+        "Device history and audit logs",
+        "Client asset associations",
+        "Automated alerts for expirations"
+      ],
+      icon: Monitor,
+      color: "orange",
+      cta: "Manage Assets Effectively",
+      ctaLink: "/trial",
+    },
+    {
+      title: "Incident & Ticket Management",
+      desc: "Manage support requests, assign technicians, track status, and resolve issues faster.",
+      points: [
+        "Ticket creation and assignment",
+        "Priority and SLA tracking",
+        "Internal team collaboration",
+        "Client communication history",
+        "Resolution time analytics"
+      ],
+      icon: Ticket,
+      color: "purple",
+      cta: "Streamline Support Now",
+      ctaLink: "/trial",
+    },
+    {
+      title: "Workflow Automation",
+      desc: "Automate repetitive tasks, reminders, approvals, notifications, and client follow-ups.",
+      points: [
+        "Custom workflow builder",
+        "Automated notifications and reminders",
+        "Approval routing and escalations",
+        "Task automation rules",
+        "Integration with client actions"
+      ],
+      icon: Workflow,
+      color: "indigo",
+      cta: "Automate Your Workflows",
+      ctaLink: "/trial",
+    },
+    {
+      title: "Client Lifecycle Tracking",
+      desc: "Manage the complete client journey from prospect to onboarding to long-term retention.",
+      points: [
+        "Client onboarding workflows",
+        "Milestone tracking",
+        "Client health scoring",
+        "Retention and churn analysis",
+        "Historical activity timeline"
+      ],
+      icon: RefreshCw,
+      color: "rose",
+      cta: "Track Client Lifecycles",
       ctaLink: "/trial",
     },
   ];
@@ -162,7 +274,7 @@ export default function FeaturesPage() {
         </div>
       </div>
 
-      {/* Features Grid - 3 Columns */}
+      {/* Features Grid - 3 Columns with Equal Heights */}
       <div className="mx-auto container px-6 lg:px-8 -mt-12 relative z-10 pb-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {features.map((feature, idx) => (
@@ -171,8 +283,8 @@ export default function FeaturesPage() {
               initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.08 }}
-              className="h-full"
+              transition={{ delay: idx * 0.05 }}
+              className="h-full flex"
             >
               <FeatureDetail {...feature} />
             </motion.div>
@@ -180,7 +292,7 @@ export default function FeaturesPage() {
         </div>
       </div>
 
-      {/* Value Proposition Section */}
+      {/* Value Proposition Section - Updated Image */}
       <div className="bg-white py-20 border-t border-b border-slate-100">
         <div className="mx-auto container px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-16 items-center">
@@ -222,15 +334,16 @@ export default function FeaturesPage() {
             <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-200">
               <Image 
                 src="/dashboard-preview.png" 
-                alt="StackMSP Platform Interface" 
+                alt="StackMSP Features Dashboard" 
                 width={600}
                 height={400}
                 className="w-full h-auto object-cover"
+                priority
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
               <div className="absolute bottom-8 left-8 text-white">
-                <p className="text-sm uppercase tracking-widest opacity-75">Live Platform</p>
-                <p className="text-2xl font-semibold">Real workflows. Real results.</p>
+                <p className="text-sm uppercase tracking-widest opacity-75">Features Overview</p>
+                <p className="text-2xl font-semibold">12 powerful tools. One platform.</p>
               </div>
             </div>
           </div>
@@ -255,13 +368,13 @@ export default function FeaturesPage() {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {features.slice(0, 6).map((feature, idx) => (
+          {features.slice(0, 12).map((feature, idx) => (
             <motion.div
               key={idx}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
+              transition={{ delay: idx * 0.05 }}
               className="bg-white rounded-3xl border border-slate-200 p-8 hover:shadow-xl transition-all duration-300 group"
             >
               <div className="flex items-start gap-4">
@@ -296,7 +409,7 @@ export default function FeaturesPage() {
           </div>
           <div className="flex flex-col sm:flex-row gap-4">
             <Link
-              href="/trial"
+              href="#"
               className="group inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-4 rounded-2xl font-semibold hover:bg-blue-700 transition-all"
             >
               Start Your Free Trial
