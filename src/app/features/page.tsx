@@ -292,7 +292,7 @@ export default function FeaturesPage() {
         </div>
       </div>
 
-      {/* Value Proposition Section - Updated Image */}
+      {/* Value Proposition Section */}
       <div className="bg-white py-20 border-t border-b border-slate-100">
         <div className="mx-auto container px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-16 items-center">
@@ -350,54 +350,6 @@ export default function FeaturesPage() {
         </div>
       </div>
 
-      {/* Feature Detail Sections - Full Width Cards */}
-      <div className="mx-auto container px-6 lg:px-8 py-20">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center max-w-3xl mx-auto mb-16"
-        >
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900">
-            Every Feature Designed for <br />
-            <span className="text-blue-600">MSP Success</span>
-          </h2>
-          <p className="mt-4 text-slate-500">
-            From client onboarding to final invoice — stackmsp handles it all.
-          </p>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {features.slice(0, 12).map((feature, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.05 }}
-              className="bg-white rounded-3xl border border-slate-200 p-8 hover:shadow-xl transition-all duration-300 group"
-            >
-              <div className="flex items-start gap-4">
-                <div className={`h-14 w-14 flex items-center justify-center rounded-2xl bg-${feature.color}-50 text-${feature.color}-600 flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
-                  <feature.icon className="h-7 w-7" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-xl font-bold text-slate-900 mb-2">{feature.title}</h3>
-                  <p className="text-slate-600 text-sm leading-relaxed">{feature.desc}</p>
-                  <Link
-                    href={feature.ctaLink}
-                    className="inline-flex items-center gap-2 mt-4 text-sm font-semibold text-blue-600 hover:gap-3 transition-all duration-300"
-                  >
-                    {feature.cta}
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-
       {/* Final CTA Section */}
       <div className="mx-auto container px-6 lg:px-8 pb-24">
         <div className="rounded-3xl bg-gradient-to-br from-slate-900 to-slate-950 text-white p-12 md:p-16 flex flex-col md:flex-row items-center justify-between gap-8">
@@ -409,7 +361,7 @@ export default function FeaturesPage() {
           </div>
           <div className="flex flex-col sm:flex-row gap-4">
             <Link
-              href="#"
+              href="/trial"
               className="group inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-4 rounded-2xl font-semibold hover:bg-blue-700 transition-all"
             >
               Start Your Free Trial

@@ -1,14 +1,54 @@
 "use client";
 
-import React from "react";
+import React, { useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Play, CheckCircle, Zap, Users, BarChart3, Shield } from "lucide-react";
+import { ArrowRight, Play, CheckCircle, Zap, Users, Shield } from "lucide-react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
 export default function Hero() {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [rotateX, setRotateX] = useState(0);
+  const [rotateY, setRotateY] = useState(0);
+  const [glowX, setGlowX] = useState(50);
+  const [glowY, setGlowY] = useState(50);
+  const [isHovering, setIsHovering] = useState(false);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    
+    // Calculate rotation (max ±10 degrees)
+    const rotateXVal = ((y - centerY) / centerY) * -10;
+    const rotateYVal = ((x - centerX) / centerX) * 10;
+    
+    setRotateX(rotateXVal);
+    setRotateY(rotateYVal);
+    
+    // Calculate glow position for reflection effect
+    setGlowX((x / rect.width) * 100);
+    setGlowY((y / rect.height) * 100);
+  };
+
+  const handleMouseEnter = () => {
+    setIsHovering(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovering(false);
+    setRotateX(0);
+    setRotateY(0);
+    setGlowX(50);
+    setGlowY(50);
+  };
+
   return (
-    <section className="mt-[80px] relative overflow-hidden min-h-[95vh] flex items-center justify-center pt-16 pb-16 lg:pt-20 lg:pb-24 bg-gradient-to-br from-slate-50 via-white to-blue-50/30 ml-16">
+    <section className="relative overflow-hidden min-h-[95vh] flex items-center justify-center pt-16 pb-16 lg:pt-20 lg:pb-24 bg-gradient-to-br from-blue-50 via-white to-blue-100/50">
       
       {/* Background Decorative Elements */}
       <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
@@ -55,7 +95,7 @@ export default function Hero() {
               analytics in one intuitive platform.
             </motion.p>
 
-            {/* CTA Buttons - Updated */}
+            {/* CTA Buttons */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -83,7 +123,7 @@ export default function Hero() {
               </motion.div>
             </motion.div>
 
-            {/* Trust Elements - Updated with 30-Day Free Trial */}
+            {/* Trust Elements */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -104,7 +144,7 @@ export default function Hero() {
               </span>
             </motion.div>
 
-            {/* Trust Section - "Trusted by..." */}
+            {/* Trust Section */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -120,7 +160,7 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* Right Side - Dashboard Image with Enhanced Tilt Animation */}
+          {/* Right Side - Dashboard Image with Interactive Tilt & Glass Reflection */}
           <motion.div 
             initial={{ opacity: 0, x: 60, scale: 0.95 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
@@ -129,18 +169,24 @@ export default function Hero() {
             style={{ perspective: "1200px" }}
           >
             <motion.div 
+              ref={cardRef}
+              onMouseEnter={handleMouseEnter}
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
               animate={{
-                rotateY: [0, -8, 8, -8, 0],
-                rotateX: [0, 2, -2, 2, 0],
+                rotateY: rotateY,
+                rotateX: rotateX,
               }}
               transition={{
-                duration: 5,
-                repeat: Infinity,
-                repeatType: "loop",
-                ease: "easeInOut",
-                delay: 0.5
+                type: "spring",
+                stiffness: 300,
+                damping: 30,
+                mass: 0.8,
               }}
-              className="relative rounded-xl border border-slate-200/80 bg-white shadow-2xl shadow-slate-200/50 overflow-hidden"
+              className="relative rounded-xl border border-slate-200/80 bg-white shadow-2xl shadow-slate-200/50 overflow-hidden cursor-pointer"
+              style={{
+                transformStyle: "preserve-3d",
+              }}
             >
               {/* Dashboard Image */}
               <Image
@@ -148,15 +194,84 @@ export default function Hero() {
                 alt="StackMSP Dashboard - Client Management, Contracts, Invoicing, Analytics"
                 width={800}
                 height={600}
-                className="w-full h-auto object-cover"
+                className="w-full h-auto object-cover relative z-10"
                 priority
               />
               
-              {/* Optional: Overlay gradient for better text readability if needed */}
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/5 to-transparent pointer-events-none" />
+              {/* Glass Reflection Effect - Radial Glow */}
+              <div 
+                className="absolute inset-0 z-20 pointer-events-none"
+                style={{
+                  background: `radial-gradient(circle at ${glowX}% ${glowY}%, 
+                    rgba(255,255,255,${isHovering ? 0.25 : 0.05}) 0%, 
+                    rgba(255,255,255,${isHovering ? 0.1 : 0.02}) 30%, 
+                    rgba(255,255,255,0) 70%)`,
+                  transition: "background 0.15s ease-out",
+                }}
+              />
               
-              {/* Shadow effect on tilt */}
-              <div className="absolute inset-0 shadow-inner pointer-events-none" />
+              {/* Glass Shine Line - Diagonal Light Streak */}
+              <div 
+                className="absolute inset-0 z-20 pointer-events-none"
+                style={{
+                  background: `linear-gradient(${135 - (rotateY * 2)}deg, 
+                    rgba(255,255,255,0) 0%, 
+                    rgba(255,255,255,${isHovering ? 0.08 : 0.02}) 35%, 
+                    rgba(255,255,255,${isHovering ? 0.35 : 0.08}) 50%, 
+                    rgba(255,255,255,${isHovering ? 0.08 : 0.02}) 65%, 
+                    rgba(255,255,255,0) 100%)`,
+                  opacity: isHovering ? Math.min(Math.abs(rotateX) / 8 + Math.abs(rotateY) / 8 + 0.2, 0.7) : 0.15,
+                  transition: "opacity 0.2s ease-out",
+                }}
+              />
+              
+              {/* Second Shine Line - For Extra Glass Effect */}
+              <div 
+                className="absolute inset-0 z-20 pointer-events-none"
+                style={{
+                  background: `linear-gradient(${45 + (rotateX * 2)}deg, 
+                    rgba(255,255,255,0) 0%, 
+                    rgba(255,255,255,${isHovering ? 0.05 : 0.01}) 40%, 
+                    rgba(255,255,255,${isHovering ? 0.15 : 0.04}) 50%, 
+                    rgba(255,255,255,${isHovering ? 0.05 : 0.01}) 60%, 
+                    rgba(255,255,255,0) 100%)`,
+                  opacity: isHovering ? Math.min(Math.abs(rotateX) / 10 + Math.abs(rotateY) / 10 + 0.1, 0.4) : 0.08,
+                  transition: "opacity 0.2s ease-out",
+                }}
+              />
+              
+              {/* Dynamic Inner Shadow */}
+              <div 
+                className="absolute inset-0 z-10 pointer-events-none"
+                style={{
+                  boxShadow: `inset 0 0 60px rgba(0,0,0,${isHovering ? Math.min((Math.abs(rotateX) + Math.abs(rotateY)) / 35 + 0.05, 0.2) : 0.03})`,
+                  transition: "box-shadow 0.2s ease-out",
+                }}
+              />
+              
+              {/* Colored Border Glow Effect */}
+              <div 
+                className="absolute -inset-px z-0 rounded-xl pointer-events-none"
+                style={{
+                  background: `linear-gradient(${rotateY * 3 + 45}deg, 
+                    rgba(59, 130, 246, ${isHovering ? Math.min(Math.abs(rotateY) / 15, 0.4) : 0}), 
+                    rgba(59, 130, 246, ${isHovering ? Math.min(Math.abs(rotateX) / 15, 0.2) : 0}), 
+                    rgba(147, 197, 253, ${isHovering ? Math.min(Math.abs(rotateY) / 20, 0.2) : 0}), 
+                    rgba(59, 130, 246, 0))`,
+                  transition: "background 0.2s ease-out",
+                }}
+              />
+
+              {/* Subtle Top Highlight */}
+              <div 
+                className="absolute inset-0 z-10 pointer-events-none"
+                style={{
+                  background: `linear-gradient(180deg, 
+                    rgba(255,255,255,${isHovering ? Math.max(0.2 - Math.abs(rotateY) / 30, 0.05) : 0.05}) 0%, 
+                    transparent 50%)`,
+                  transition: "background 0.2s ease-out",
+                }}
+              />
             </motion.div>
 
             {/* Floating Badge */}
