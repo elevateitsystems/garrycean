@@ -23,7 +23,7 @@ import {
 
 export default function TrialPage() {
   const [step, setStep] = useState(1);
-  const [selectedPlan, setSelectedPlan] = useState<string | null>("growth");
+  const [selectedPlan, setSelectedPlan] = useState<string | null>("starter");
   const [form, setForm] = useState({
     companyName: "",
     website: "",
@@ -40,33 +40,45 @@ export default function TrialPage() {
     { num: 4, label: "Review", sub: "Verify information", icon: Shield },
   ];
 
+  // Updated plans to match Pricing page
   const plans = [
     { 
       id: "starter", 
       name: "Starter", 
-      desc: "For small teams and consultants", 
-      price: "$149",
-      features: ["5 seats", "150 devices", "Standard support"],
+      desc: "For solo consultants & small teams", 
+      price: "$99.99",
+      annualPrice: "$89.99",
+      period: "/month",
+      features: [
+        "1 super admin",
+        "Client Hub",
+        "Contracts & Invoicing",
+        "Proposal Builder",
+        "Analytics",
+        "Team Tools",
+        "Client Portal"
+      ],
       icon: Briefcase,
-      popular: false
-    },
-    { 
-      id: "growth", 
-      name: "Growth", 
-      desc: "Designed for scaling operations", 
-      price: "$349",
-      features: ["15 seats", "1,000 devices", "Priority support"],
-      icon: Users,
-      popular: true
+      popular: true,
+      savings: "Save 10% with annual billing",
     },
     { 
       id: "enterprise", 
       name: "Enterprise", 
-      desc: "For corporate compliance", 
+      desc: "For established MSPs and larger teams", 
       price: "Custom",
-      features: ["Unlimited seats", "Unlimited devices", "Dedicated support"],
+      period: "",
+      features: [
+        "Unlimited seats",
+        "Dedicated custom domain",
+        "24/7 priority support",
+        "Advanced security & compliance",
+        "Dedicated account manager",
+        "Custom onboarding"
+      ],
       icon: Shield,
-      popular: false
+      popular: false,
+      isEnterprise: true,
     },
   ];
 
@@ -112,7 +124,7 @@ export default function TrialPage() {
           transition={{ duration: 0.7 }}
           className="max-w-3xl mx-auto text-center mb-12 space-y-4"
         >
-          <Link href="/" className=" p-8 inline-flex items-center gap-2 text-sm font-semibold text-brand-blue hover:gap-3 transition-all duration-300 group">
+          <Link href="/" className="p-8 inline-flex items-center gap-2 text-sm font-semibold text-brand-blue hover:gap-3 transition-all duration-300 group">
             <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
             Back to Home
           </Link>
@@ -186,7 +198,7 @@ export default function TrialPage() {
           className="max-w-3xl mx-auto bg-white border border-slate-200/80 rounded-3xl p-6 sm:p-8 shadow-2xl shadow-slate-200/50"
         >
           <AnimatePresence mode="wait">
-            {/* Step 1: Choose Your Plan */}
+            {/* Step 1: Choose Your Plan - UPDATED to match Pricing page */}
             {step === 1 && (
               <motion.div
                 key="step1"
@@ -199,10 +211,10 @@ export default function TrialPage() {
                 <div className="p-6 bg-gradient-to-br from-blue-50/80 to-purple-50/80 border border-blue-100 rounded-2xl space-y-2">
                   <h3 className="text-lg font-bold text-brand-blue flex items-center gap-2">
                     <Sparkles className="h-5 w-5" />
-                    🎉 1-Month Free Trial Included!
+                    🎉 30-Day Free Trial Included!
                   </h3>
                   <p className="text-sm text-slate-600 leading-relaxed">
-                    All plans include a full month of free access. No payment required during trial. 
+                    All plans include a full 30 days of free access. No payment required during trial. 
                     Full access to all features immediately.
                   </p>
                   <p className="text-xs text-slate-500 italic flex items-center gap-1">
@@ -211,7 +223,7 @@ export default function TrialPage() {
                   </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {plans.map((p) => {
                     const Icon = p.icon;
                     const isSelected = selectedPlan === p.id;
@@ -228,7 +240,13 @@ export default function TrialPage() {
                         {p.popular && (
                           <span className="absolute -top-2 -right-2 bg-gradient-to-r from-brand-blue to-purple-500 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full flex items-center gap-1">
                             <Star className="h-2.5 w-2.5" />
-                            Popular
+                            Most Popular
+                          </span>
+                        )}
+                        {p.isEnterprise && (
+                          <span className="absolute -top-2 -right-2 bg-gradient-to-r from-purple-500 to-purple-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full flex items-center gap-1">
+                            <Sparkles className="h-2.5 w-2.5" />
+                            Custom
                           </span>
                         )}
                         <div className={`flex h-10 w-10 items-center justify-center rounded-xl mb-3 ${
@@ -238,13 +256,30 @@ export default function TrialPage() {
                         </div>
                         <span className="text-sm font-bold text-slate-900">{p.name}</span>
                         <span className="text-xs text-slate-400 mt-1 min-h-[32px]">{p.desc}</span>
-                        <span className="text-2xl font-black text-brand-blue mt-3">{p.price}</span>
+                        <div className="mt-3">
+                          {p.isEnterprise ? (
+                            <span className="text-2xl font-black text-purple-600">{p.price}</span>
+                          ) : (
+                            <>
+                              <span className="text-2xl font-black text-brand-blue">{p.price}</span>
+                              <span className="text-sm font-semibold text-slate-500">{p.period}</span>
+                              {p.savings && (
+                                <span className="block text-xs text-emerald-600 font-semibold mt-0.5">
+                                  {p.savings}
+                                </span>
+                              )}
+                            </>
+                          )}
+                        </div>
                         <div className="mt-3 flex flex-wrap gap-1.5">
-                          {p.features.map((f, i) => (
+                          {p.features.slice(0, 4).map((f, i) => (
                             <span key={i} className="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full">
                               {f}
                             </span>
                           ))}
+                          {p.features.length > 4 && (
+                            <span className="text-[10px] text-slate-400">+{p.features.length - 4} more</span>
+                          )}
                         </div>
                       </button>
                     );
@@ -375,6 +410,11 @@ export default function TrialPage() {
                     <span className="text-slate-900 font-semibold capitalize mt-1 block">
                       {selectedPlan ? plans.find(p => p.id === selectedPlan)?.name : "None (Skip)"}
                     </span>
+                    {selectedPlan && !plans.find(p => p.id === selectedPlan)?.isEnterprise && (
+                      <span className="text-xs text-slate-500 mt-0.5 block">
+                        {plans.find(p => p.id === selectedPlan)?.price}/month
+                      </span>
+                    )}
                   </div>
                   <div className="p-4 bg-slate-50 rounded-xl border border-slate-200">
                     <span className="block text-xs font-bold text-slate-400 uppercase tracking-wider">Company Name</span>

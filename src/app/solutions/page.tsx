@@ -13,7 +13,7 @@ export default function SolutionsPage() {
       desc: "Remove manual calculations from client invoicing. Our PSA solution directly connects device tracking logs to your billing engine, matching tier contracts.",
       icon: Zap,
       benefits: ["Automated billing profiles", "Prorated adjustments", "Direct QuickBooks Sync"],
-      image: "/invoice-image.png",
+      image: "/solutions-img/invoice-image.png",
       imageAlt: "Consolidated Billing workspace preview - Invoice management",
       color: "blue",
       tag: "Finance",

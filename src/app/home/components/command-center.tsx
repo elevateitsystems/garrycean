@@ -109,13 +109,13 @@ export default function CommandCenter() {
           </p>
         </motion.div>
 
-        {/* Stats Row */}
+        {/* Stats Row - Four Feature Cards */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12 max-w-[1150px] mx-auto"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-[1150px] mx-auto"
         >
           {stats.map((stat, index) => {
             const Icon = stat.icon;
@@ -127,157 +127,36 @@ export default function CommandCenter() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 + 0.3 }}
-                whileHover={{ y: -4 }}
-                className={`relative bg-white rounded-2xl border ${colors.border} p-5 shadow-sm hover:shadow-xl transition-all duration-300 group`}
+                whileHover={{ y: -4, scale: 1.02 }}
+                className={`relative bg-white rounded-2xl border ${colors.border} p-6 shadow-sm hover:shadow-xl transition-all duration-300 group`}
               >
                 <div className="flex items-start justify-between">
-                  <div>
-                    <p className="text-xs font-medium text-slate-400 uppercase tracking-wider">
+                  <div className="flex-1">
+                    <p className="text-xs font-medium text-slate-400 uppercase tracking-wider ">
                       {stat.label}
                     </p>
-                    <p className="text-2xl font-bold text-slate-900 mt-1">
+                    <p className="text-3xl font-bold text-slate-900 mt-1.5">
                       {stat.value}
                     </p>
-                    <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold mt-1 ${colors.change}`}>
+                    <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold mt-2 ${colors.change}`}>
                       {stat.change}
                     </span>
                   </div>
-                  <div className={`flex h-10 w-10 items-center justify-center rounded-xl ${colors.iconBg} ${colors.iconText} group-hover:scale-110 transition-transform duration-300`}>
-                    <Icon className="h-5 w-5" />
+                  <div className={`flex h-12 w-12 items-center justify-center rounded-xl ${colors.iconBg} ${colors.iconText} group-hover:scale-110 transition-transform duration-300 flex-shrink-0`}>
+                    <Icon className="h-6 w-6" />
                   </div>
                 </div>
+                
                 {/* Bottom Progress Bar */}
                 <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-slate-200 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className={`h-full w-1/2 bg-gradient-to-r ${colors.gradient} rounded-full`} />
                 </div>
+
+                {/* Subtle Glow Effect on Hover */}
+                <div className={`absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r ${colors.gradient} blur-xl -z-10`} />
               </motion.div>
             );
           })}
-        </motion.div>
-
-        {/* Dashboard UI Visualization with Premium Design */}
-        <motion.div 
-          initial={{ opacity: 0, y: 80, scale: 0.95 }}
-          whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="relative mx-auto max-w-6xl"
-        >
-          {/* Main Card with Glow Effect */}
-          <div className="relative">
-            {/* Glow behind card */}
-            <div className="absolute -inset-4 bg-gradient-to-r from-brand-blue/10 via-purple-500/10 to-emerald-500/10 rounded-3xl blur-2xl opacity-50" />
-            
-            {/* Card */}
-            <div className="relative rounded-2xl border border-slate-200/80 bg-white/90 backdrop-blur-sm shadow-2xl overflow-hidden">
-              
-              {/* Top Bar with Premium Design */}
-              <div className="flex items-center justify-between border-b border-slate-200/50 px-6 py-4 bg-gradient-to-r from-slate-50/80 to-white/80">
-                <div className="flex items-center gap-4">
-                  <div className="flex gap-1.5">
-                    <span className="h-3 w-3 rounded-full bg-rose-400 shadow-lg shadow-rose-400/30" />
-                    <span className="h-3 w-3 rounded-full bg-amber-400 shadow-lg shadow-amber-400/30" />
-                    <span className="h-3 w-3 rounded-full bg-emerald-400 shadow-lg shadow-emerald-400/30" />
-                  </div>
-                  <span className="text-xs text-slate-400 font-mono bg-slate-100 px-3 py-1 rounded-full">
-                    dashboard.stackmsp.com
-                  </span>
-                </div>
-                
-                <div className="flex items-center gap-3">
-                  <span className="flex items-center gap-1.5 text-xs text-slate-400">
-                    <Bell className="h-3.5 w-3.5" />
-                    <span className="bg-brand-blue text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
-                      3
-                    </span>
-                  </span>
-                  <span className="flex items-center gap-2 text-xs text-slate-400">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    Live
-                  </span>
-                </div>
-              </div>
-
-              {/* Image Container with Premium Overlay */}
-              <div className="relative w-full bg-slate-950/5">
-                <div className="relative w-full aspect-[16/9] overflow-hidden">
-                  <Image
-                    src="/dashboard-preview.png"
-                    alt="StackMSP Dashboard Preview"
-                    fill
-                    className="object-contain transition-transform duration-1000 hover:scale-105"
-                    priority
-                  />
-                  
-                  {/* Overlay Gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/5 via-transparent to-transparent pointer-events-none" />
-                  
-                  {/* Floating Status Badge */}
-                  <motion.div 
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.8 }}
-                    className="absolute bottom-4 left-4 bg-white/95 backdrop-blur-sm rounded-xl px-4 py-2.5 border border-slate-200/50 shadow-lg"
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className="flex -space-x-2">
-                        <div className="w-8 h-8 rounded-full bg-blue-100 border-2 border-white flex items-center justify-center text-xs font-bold text-blue-600">
-                          JD
-                        </div>
-                        <div className="w-8 h-8 rounded-full bg-purple-100 border-2 border-white flex items-center justify-center text-xs font-bold text-purple-600">
-                          SK
-                        </div>
-                        <div className="w-8 h-8 rounded-full bg-emerald-100 border-2 border-white flex items-center justify-center text-xs font-bold text-emerald-600">
-                          MR
-                        </div>
-                      </div>
-                      <div className="border-l border-slate-200 pl-3">
-                        <p className="text-xs font-semibold text-slate-700">Team Online</p>
-                        <p className="text-[10px] text-slate-400">8 members active</p>
-                      </div>
-                    </div>
-                  </motion.div>
-
-                  {/* Top Right Floating Badge */}
-                  <motion.div 
-                    initial={{ opacity: 0, y: -10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.9 }}
-                    className="absolute top-4 right-4 bg-gradient-to-r from-brand-blue to-purple-500 text-white rounded-xl px-4 py-2 shadow-lg shadow-brand-blue/30"
-                  >
-                    <div className="flex items-center gap-2">
-                      <Zap className="h-4 w-4" />
-                      <span className="text-xs font-bold">Live Demo</span>
-                    </div>
-                  </motion.div>
-                </div>
-              </div>
-
-              {/* Bottom Bar */}
-              <div className="flex items-center justify-between border-t border-slate-200/50 px-6 py-3 bg-gradient-to-r from-white/80 to-slate-50/80">
-                <div className="flex items-center gap-4">
-                  <span className="flex items-center gap-1.5 text-xs text-slate-400">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
-                    System operational
-                  </span>
-                  <span className="w-px h-4 bg-slate-200" />
-                  <span className="flex items-center gap-1.5 text-xs text-slate-400">
-                    <Activity className="h-3.5 w-3.5 text-blue-400" />
-                    Last updated: 2m ago
-                  </span>
-                </div>
-                <Link 
-                  href="#" 
-                  className="group inline-flex items-center gap-1.5 text-xs font-semibold text-brand-blue hover:gap-2.5 transition-all duration-300"
-                >
-                  View full dashboard
-                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-                </Link>
-              </div>
-            </div>
-          </div>
         </motion.div>
 
         {/* Bottom CTA */}
@@ -288,16 +167,16 @@ export default function CommandCenter() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="text-center mt-16"
         >
-          <div className="inline-flex items-center gap-6 bg-white px-6 py-4 rounded-2xl border border-slate-200/80 shadow-sm">
+          <div className="inline-flex flex-wrap items-center justify-center gap-4 bg-white px-6 py-4 rounded-2xl border border-slate-200/80 shadow-sm">
             <span className="text-sm text-slate-600">
               <span className="font-bold text-slate-900">1,200+</span> dashboards live
             </span>
-            <span className="w-px h-6 bg-slate-200" />
+            <span className="w-px h-6 bg-slate-200 hidden sm:block" />
             <span className="text-sm text-slate-600">
               ⚡ <span className="font-semibold text-brand-blue">99.9%</span> uptime
             </span>
             <span className="w-px h-6 bg-slate-200 hidden sm:block" />
-            <span className="text-sm text-slate-600 hidden sm:block">
+            <span className="text-sm text-slate-600">
               🚀 <span className="font-semibold text-slate-900">4.9/5</span> rating
             </span>
           </div>
